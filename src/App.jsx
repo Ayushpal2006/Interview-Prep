@@ -7,6 +7,8 @@ import {
   Boxes, Layers, Globe, Database, Box, Cpu, Network, ExternalLink, Atom,
   ChevronDown, HelpCircle, FileCode, Check, Copy
 } from "lucide-react";
+import OopModule from "./oop/OopModule";
+import ComputerNetworksModule from "./cn/ComputerNetworksModule";
 
 /* ======================================================================
    THEME PALETTE
@@ -417,20 +419,13 @@ export default function App() {
 
         {(activeTab === "all" || activeTab === "oop") && (
           <section className="mb-8">
-            <h2 className="font-display text-xl font-extrabold mb-4 flex items-center gap-2" style={{ color: INK }}>
-              <Layers size={22} style={{ color: C.grape }} /> Object-Oriented Programming (OOP) Topic Components
-            </h2>
-            <TopicOOPInheritance />
-            <TopicPolymorphismVTable />
+            <OopModule />
           </section>
         )}
 
         {(activeTab === "all" || activeTab === "cn") && (
           <section className="mb-8">
-            <h2 className="font-display text-xl font-extrabold mb-4 flex items-center gap-2" style={{ color: INK }}>
-              <Network size={22} style={{ color: C.amber }} /> Computer Networks (CN) Topic Components
-            </h2>
-            <TopicNetworkTopologiesOSI />
+            <ComputerNetworksModule />
           </section>
         )}
       </main>
