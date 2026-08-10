@@ -5,7 +5,7 @@ import {
   ChevronRight, Play, CheckCircle2, XCircle, Clock, GitBranch,
   Terminal, X, RotateCcw, ArrowRight, Sparkles, ShieldCheck,
   Boxes, Layers, Globe, Database, Box, Menu, Cpu, Network, ExternalLink, Atom,
-  Shield, Server, HardDrive, Wifi, Radio, Zap, Lock, RefreshCw, Activity, ArrowLeftRight
+  Shield, Server, HardDrive, Wifi, Radio, Zap, Lock, RefreshCw, Activity, ArrowLeftRight, FileText, Key, Check
 } from "lucide-react";
 
 /* ======================================================================
@@ -90,7 +90,7 @@ function Mascot({ size = 42 }) {
 }
 
 /* ======================================================================
-   EXISTING & ENHANCED DIAGRAM COMPONENTS
+   VISUAL SVG DIAGRAM COMPONENTS
    ====================================================================== */
 
 function DiagTable({ color = C.sky }) {
@@ -660,7 +660,7 @@ function DiagIgnore() {
 }
 
 /* ======================================================================
-   NEW COMPUTER NETWORKS CUSTOM VISUAL DIAGRAMS (FROM DOCUMENT)
+   COMPUTER NETWORKS VISUAL DIAGRAMS
    ====================================================================== */
 
 function DiagStarTopology() {
@@ -742,7 +742,7 @@ function DiagMeshTopology() {
           <text x={x} y={y + 3} fontSize="6.5" fontWeight="800" fill="#fff" textAnchor="middle">{i + 1}</text>
         </g>
       ))}
-      <text x="100" y="52" fontSize="7" fontWeight="800" fill={INK} textAnchor="middle">Full Mesh (N*(N-1)/2)</text>
+      <text x="100" y="52" fontSize="7" fontWeight="800" fill={INK} textAnchor="middle">Full Mesh</text>
     </svg>
   );
 }
@@ -769,17 +769,14 @@ function DiagTreeTopology() {
 function DiagHybridTopology() {
   return (
     <svg viewBox="0 0 200 110" className="w-full h-24">
-      {/* Star side */}
       <circle cx="50" cy="55" r="12" fill={C.amber} stroke={INK} strokeWidth="2" />
       <line x1="50" y1="55" x2="25" y2="30" stroke={INK} strokeWidth="1.8" />
       <line x1="50" y1="55" x2="25" y2="80" stroke={INK} strokeWidth="1.8" />
       <circle cx="25" cy="30" r="7" fill={C.sky} stroke={INK} strokeWidth="1.5" />
       <circle cx="25" cy="80" r="7" fill={C.sky} stroke={INK} strokeWidth="1.5" />
-      {/* Connector */}
       <line x1="62" y1="55" x2="130" y2="55" stroke={INK} strokeWidth="3" strokeDasharray="4 2" />
       <rect x="88" y="44" width="24" height="22" rx="5" fill={C.sun} stroke={INK} strokeWidth="2" />
       <text x="100" y="58" fontSize="6" fontWeight="800" fill={INK} textAnchor="middle">Bridge</text>
-      {/* Ring side */}
       <circle cx="155" cy="55" r="22" fill="none" stroke={C.grape} strokeWidth="2.5" />
       {[0, 90, 180, 270].map((deg, i) => {
         const rad = (deg * Math.PI) / 180;
@@ -794,7 +791,6 @@ function DiagHybridTopology() {
 function DiagNetworkScale() {
   return (
     <svg viewBox="0 0 200 110" className="w-full h-24">
-      {/* Concentric scale */}
       <circle cx="100" cy="55" r="48" fill={C.sky} fillOpacity="0.15" stroke={INK} strokeWidth="2" />
       <circle cx="100" cy="55" r="36" fill={C.mint} fillOpacity="0.25" stroke={INK} strokeWidth="2" />
       <circle cx="100" cy="55" r="24" fill={C.sun} fillOpacity="0.35" stroke={INK} strokeWidth="2" />
@@ -810,15 +806,11 @@ function DiagNetworkScale() {
 function DiagVPNTunnel() {
   return (
     <svg viewBox="0 0 200 110" className="w-full h-24">
-      {/* Public internet cloud background */}
       <path d="M40,55 Q50,25 90,30 Q120,20 150,40 Q170,55 150,75 Q120,90 80,80 Q40,85 40,55 Z" fill="#EAE6F8" stroke={INK} strokeWidth="2" strokeDasharray="3 3" />
-      {/* Secure tunnel inside */}
       <rect x="25" y="44" width="150" height="22" rx="11" fill={C.leaf} stroke={INK} strokeWidth="2.5" />
       <text x="100" y="58" fontSize="7.5" fontWeight="800" fill={INK} textAnchor="middle">AES Encrypted VPN Tunnel</text>
-      {/* Left Client */}
       <rect x="8" y="38" width="28" height="34" rx="5" fill={C.sky} stroke={INK} strokeWidth="2" />
       <text x="22" y="58" fontSize="6" fontWeight="800" fill="#fff" textAnchor="middle">User</text>
-      {/* Right Office Server */}
       <rect x="164" y="38" width="28" height="34" rx="5" fill={C.grape} stroke={INK} strokeWidth="2" />
       <text x="178" y="58" fontSize="6" fontWeight="800" fill="#fff" textAnchor="middle">Corp</text>
     </svg>
@@ -829,12 +821,10 @@ function DiagIPv4Classes() {
   return (
     <svg viewBox="0 0 200 110" className="w-full h-24">
       <rect x="10" y="10" width="180" height="90" rx="8" fill="#fff" stroke={INK} strokeWidth="2.5" />
-      {/* Header */}
       <rect x="10" y="10" width="180" height="18" rx="8" fill={C.sun} stroke={INK} strokeWidth="2" />
       <text x="30" y="22" fontSize="6.5" fontWeight="800" fill={INK}>Class</text>
       <text x="80" y="22" fontSize="6.5" fontWeight="800" fill={INK}>1st Octet Range</text>
       <text x="150" y="22" fontSize="6.5" fontWeight="800" fill={INK}>Primary Usage</text>
-      {/* Rows */}
       {[
         { c: "A", r: "1 – 126", u: "Large Networks", col: C.sky },
         { c: "B", r: "128 – 191", u: "Medium Networks", col: C.mint },
@@ -864,35 +854,23 @@ function DiagOSIvsTCPIP() {
     { name: "2. Data Link", col: C.sun },
     { name: "1. Physical", col: C.leaf }
   ];
-  const tcpip = [
-    { name: "Application", col: C.coral, h: 3 },
-    { name: "Transport", col: C.sky, h: 1 },
-    { name: "Internet", col: C.mint, h: 1 },
-    { name: "Network Link", col: C.leaf, h: 2 }
-  ];
   return (
     <svg viewBox="0 0 200 110" className="w-full h-24">
-      {/* OSI Stack */}
       <text x="48" y="10" fontSize="7" fontWeight="800" fill={INK} textAnchor="middle">OSI Model (7)</text>
       {osi.map((l, i) => (
         <g key={i}>
           <rect x="8" y={14 + i * 13} width="80" height="11" rx="3" fill={l.col} stroke={INK} strokeWidth="1.5" />
-          <text x="48" y={22 + i * 13} fontSize="5.5" fontWeight="800" fill={INK} textAnchor="middle">{l.name}</text>
+          <text x="48" y="22 + i * 13" fontSize="5.5" fontWeight="800" fill={INK} textAnchor="middle">{l.name}</text>
         </g>
       ))}
-      {/* Arrow mapping */}
       <line x1="92" y1="55" x2="108" y2="55" stroke={INK} strokeWidth="2" strokeDasharray="2 2" />
-      {/* TCP/IP Stack */}
       <text x="152" y="10" fontSize="7" fontWeight="800" fill={INK} textAnchor="middle">TCP/IP Model (4)</text>
       <rect x="112" y="14" width="80" height="37" rx="4" fill={C.coral} stroke={INK} strokeWidth="1.5" />
       <text x="152" y="35" fontSize="6.5" fontWeight="800" fill={INK} textAnchor="middle">Application</text>
-
       <rect x="112" y="53" width="80" height="11" rx="3" fill={C.sky} stroke={INK} strokeWidth="1.5" />
       <text x="152" y="61" fontSize="6" fontWeight="800" fill={INK} textAnchor="middle">Transport</text>
-
       <rect x="112" y="66" width="80" height="11" rx="3" fill={C.mint} stroke={INK} strokeWidth="1.5" />
       <text x="152" y="74" fontSize="6" fontWeight="800" fill={INK} textAnchor="middle">Internet</text>
-
       <rect x="112" y="79" width="80" height="24" rx="4" fill={C.leaf} stroke={INK} strokeWidth="1.5" />
       <text x="152" y="94" fontSize="6" fontWeight="800" fill={INK} textAnchor="middle">Link Layer</text>
     </svg>
@@ -902,18 +880,12 @@ function DiagOSIvsTCPIP() {
 function DiagHTTPvsHTTPS() {
   return (
     <svg viewBox="0 0 200 110" className="w-full h-24">
-      {/* HTTP Box */}
       <rect x="10" y="20" width="85" height="70" rx="8" fill={C.sun} stroke={INK} strokeWidth="2.5" />
       <text x="52" y="38" fontSize="9" fontWeight="800" fill={INK} textAnchor="middle">HTTP</text>
       <text x="52" y="52" fontSize="7" fontWeight="700" fill={INK} textAnchor="middle">Port 80</text>
       <text x="52" y="68" fontSize="6.5" fontWeight="700" fill={C.coral} textAnchor="middle">Plain Text</text>
-      <text x="52" y="80" fontSize="6" fill={INK} textAnchor="middle">No Security</text>
-
-      {/* VS Badge */}
       <circle cx="100" cy="55" r="12" fill="#fff" stroke={INK} strokeWidth="2" />
       <text x="100" y="58" fontSize="7" fontWeight="800" fill={INK} textAnchor="middle">VS</text>
-
-      {/* HTTPS Box */}
       <rect x="105" y="20" width="85" height="70" rx="8" fill={C.mint} stroke={INK} strokeWidth="2.5" />
       <text x="147" y="38" fontSize="9" fontWeight="800" fill={INK} textAnchor="middle">HTTPS</text>
       <text x="147" y="52" fontSize="7" fontWeight="700" fill={INK} textAnchor="middle">Port 443</text>
@@ -932,22 +904,15 @@ function DiagDNSFlow() {
           <path d="M0,0L7,3.5L0,7Z" fill={INK} />
         </marker>
       </defs>
-      {/* PC */}
       <rect x="8" y="35" width="40" height="40" rx="6" fill={C.sky} stroke={INK} strokeWidth="2.5" />
       <text x="28" y="58" fontSize="7" fontWeight="800" fill="#fff" textAnchor="middle">Browser</text>
-      {/* DNS Resolver */}
       <rect x="80" y="35" width="45" height="40" rx="6" fill={C.sun} stroke={INK} strokeWidth="2.5" />
       <text x="102" y="54" fontSize="6.5" fontWeight="800" fill={INK} textAnchor="middle">DNS Server</text>
       <text x="102" y="65" fontSize="5.5" fill={INK} textAnchor="middle">(UDP 53)</text>
-      {/* Target IP */}
       <rect x="152" y="35" width="40" height="40" rx="6" fill={C.leaf} stroke={INK} strokeWidth="2.5" />
       <text x="172" y="58" fontSize="6.5" fontWeight="800" fill={INK} textAnchor="middle">IP Web</text>
-
       <line x1="48" y1="48" x2="78" y2="48" stroke={INK} strokeWidth="2" markerEnd={`url(#${uid}-dns)`} />
-      <text x="63" y="44" fontSize="5.5" fontWeight="700" fill={INK} textAnchor="middle">"site.com?"</text>
-
       <line x1="125" y1="55" x2="150" y2="55" stroke={INK} strokeWidth="2" markerEnd={`url(#${uid}-dns)`} />
-      <text x="137" y="50" fontSize="5.5" fontWeight="700" fill={INK} textAnchor="middle">142.250.x.x</text>
     </svg>
   );
 }
@@ -955,21 +920,14 @@ function DiagDNSFlow() {
 function DiagHubvsSwitch() {
   return (
     <svg viewBox="0 0 200 110" className="w-full h-24">
-      {/* Hub Side */}
       <rect x="8" y="15" width="84" height="80" rx="8" fill={C.pink} stroke={INK} strokeWidth="2.5" />
       <text x="50" y="30" fontSize="7.5" fontWeight="800" fill={INK} textAnchor="middle">HUB (Layer 1)</text>
       <circle cx="50" cy="50" r="10" fill={C.coral} stroke={INK} strokeWidth="2" />
       <text x="50" y="53" fontSize="5.5" fontWeight="800" fill="#fff" textAnchor="middle">Broadcast</text>
-      <text x="50" y="75" fontSize="6" fill={INK} textAnchor="middle">Sends to ALL ports</text>
-      <text x="50" y="86" fontSize="5.5" fill={INK} textAnchor="middle">(Half Duplex / No filter)</text>
-
-      {/* Switch Side */}
       <rect x="108" y="15" width="84" height="80" rx="8" fill={C.mint} stroke={INK} strokeWidth="2.5" />
       <text x="150" y="30" fontSize="7.5" fontWeight="800" fill={INK} textAnchor="middle">SWITCH (Layer 2)</text>
       <circle cx="150" cy="50" r="10" fill={C.leaf} stroke={INK} strokeWidth="2" />
       <text x="150" y="53" fontSize="5.5" fontWeight="800" fill={INK} textAnchor="middle">MAC Table</text>
-      <text x="150" y="75" fontSize="6" fill={INK} textAnchor="middle">Directs to target port</text>
-      <text x="150" y="86" fontSize="5.5" fill={INK} textAnchor="middle">(Full Duplex / Packet filter)</text>
     </svg>
   );
 }
@@ -985,21 +943,16 @@ function DiagDHCPDORA() {
       </defs>
       <rect x="10" y="15" width="40" height="80" rx="6" fill={C.sky} stroke={INK} strokeWidth="2.5" />
       <text x="30" y="58" fontSize="7" fontWeight="800" fill="#fff" textAnchor="middle">Client</text>
-
       <rect x="150" y="15" width="40" height="80" rx="6" fill={C.amber} stroke={INK} strokeWidth="2.5" />
       <text x="170" y="58" fontSize="6.5" fontWeight="800" fill={INK} textAnchor="middle">DHCP</text>
-
       <line x1="50" y1="28" x2="148" y2="28" stroke={INK} strokeWidth="2" markerEnd={`url(#${uid}-dora)`} />
-      <text x="100" y="24" fontSize="6" fontWeight="800" fill={INK} textAnchor="middle">1. Discover (Broadcast)</text>
-
+      <text x="100" y="24" fontSize="6" fontWeight="800" fill={INK} textAnchor="middle">1. Discover</text>
       <line x1="150" y1="48" x2="52" y2="48" stroke={INK} strokeWidth="2" markerEnd={`url(#${uid}-dora)`} />
-      <text x="100" y="44" fontSize="6" fontWeight="800" fill={INK} textAnchor="middle">2. Offer (IP Offer)</text>
-
+      <text x="100" y="44" fontSize="6" fontWeight="800" fill={INK} textAnchor="middle">2. Offer</text>
       <line x1="50" y1="68" x2="148" y2="68" stroke={INK} strokeWidth="2" markerEnd={`url(#${uid}-dora)`} />
-      <text x="100" y="64" fontSize="6" fontWeight="800" fill={INK} textAnchor="middle">3. Request (IP Choice)</text>
-
+      <text x="100" y="64" fontSize="6" fontWeight="800" fill={INK} textAnchor="middle">3. Request</text>
       <line x1="150" y1="88" x2="52" y2="88" stroke={INK} strokeWidth="2" markerEnd={`url(#${uid}-dora)`} />
-      <text x="100" y="84" fontSize="6" fontWeight="800" fill={INK} textAnchor="middle">4. Acknowledge (ACK)</text>
+      <text x="100" y="84" fontSize="6" fontWeight="800" fill={INK} textAnchor="middle">4. ACK</text>
     </svg>
   );
 }
@@ -1015,14 +968,9 @@ function DiagARPRolodex() {
       </defs>
       <rect x="15" y="30" width="65" height="50" rx="8" fill={C.sun} stroke={INK} strokeWidth="2.5" />
       <text x="47" y="50" fontSize="7" fontWeight="800" fill={INK} textAnchor="middle">Logical IP</text>
-      <text x="47" y="64" fontSize="6" fill={INK} textAnchor="middle">192.168.1.5</text>
-
       <line x1="80" y1="55" x2="118" y2="55" stroke={INK} strokeWidth="3" markerEnd={`url(#${uid}-arp)`} />
-      <text x="100" y="46" fontSize="6.5" fontWeight="800" fill={INK} textAnchor="middle">ARP Lookup</text>
-
       <rect x="120" y="30" width="65" height="50" rx="8" fill={C.leaf} stroke={INK} strokeWidth="2.5" />
       <text x="152" y="50" fontSize="7" fontWeight="800" fill={INK} textAnchor="middle">Physical MAC</text>
-      <text x="152" y="64" fontSize="5.5" fill={INK} textAnchor="middle">00:1A:2B:3C:4D:5E</text>
     </svg>
   );
 }
@@ -1033,12 +981,9 @@ function DiagGatewayvsRouter() {
       <rect x="8" y="20" width="85" height="70" rx="8" fill={C.sky} stroke={INK} strokeWidth="2.5" />
       <text x="50" y="42" fontSize="8" fontWeight="800" fill="#fff" textAnchor="middle">ROUTER</text>
       <text x="50" y="60" fontSize="6.5" fontWeight="700" fill="#fff" textAnchor="middle">Similar Networks</text>
-      <text x="50" y="74" fontSize="6" fill="#fff" textAnchor="middle">(e.g. IP to IP)</text>
-
       <rect x="107" y="20" width="85" height="70" rx="8" fill={C.grape} stroke={INK} strokeWidth="2.5" />
       <text x="150" y="42" fontSize="8" fontWeight="800" fill="#fff" textAnchor="middle">GATEWAY</text>
       <text x="150" y="60" fontSize="6.5" fontWeight="700" fill="#fff" textAnchor="middle">Dissimilar Networks</text>
-      <text x="150" y="74" fontSize="6" fill="#fff" textAnchor="middle">(Protocol conversion)</text>
     </svg>
   );
 }
@@ -1046,24 +991,11 @@ function DiagGatewayvsRouter() {
 function DiagFirewall() {
   return (
     <svg viewBox="0 0 200 110" className="w-full h-24">
-      {/* Public Net */}
       <circle cx="25" cy="55" r="16" fill={C.pink} stroke={INK} strokeWidth="2" />
-      <text x="25" y="58" fontSize="6.5" fontWeight="800" fill={INK} textAnchor="middle">Internet</text>
-
-      {/* Firewall Wall */}
       <rect x="85" y="15" width="30" height="80" rx="4" fill={C.coral} stroke={INK} strokeWidth="3" />
       <text x="100" y="58" fontSize="8" fontWeight="800" fill="#fff" textAnchor="middle" transform="rotate(-90 100 58)">FIREWALL</text>
-
-      {/* Allowed vs Blocked */}
-      <line x1="41" y1="40" x2="85" y2="40" stroke={INK} strokeWidth="2" />
-      <text x="63" y="35" fontSize="6" fontWeight="700" fill={C.coral} textAnchor="middle">&#10005; Blocked</text>
-
       <line x1="41" y1="70" x2="155" y2="70" stroke={INK} strokeWidth="2" />
-      <text x="63" y="65" fontSize="6" fontWeight="700" fill={C.leaf} textAnchor="middle">&#10003; Safe Data</text>
-
-      {/* Private Net */}
       <rect x="155" y="35" width="38" height="40" rx="6" fill={C.mint} stroke={INK} strokeWidth="2" />
-      <text x="174" y="58" fontSize="6.5" fontWeight="800" fill={INK} textAnchor="middle">Private Network</text>
     </svg>
   );
 }
@@ -1073,19 +1005,12 @@ function DiagCastTypes() {
     <svg viewBox="0 0 200 110" className="w-full h-24">
       <rect x="10" y="10" width="85" height="42" rx="6" fill={C.sky} stroke={INK} strokeWidth="2" />
       <text x="52" y="28" fontSize="7" fontWeight="800" fill="#fff" textAnchor="middle">Unicast (1 to 1)</text>
-      <text x="52" y="42" fontSize="5.5" fill="#fff" textAnchor="middle">Single receiver node</text>
-
       <rect x="105" y="10" width="85" height="42" rx="6" fill={C.sun} stroke={INK} strokeWidth="2" />
       <text x="147" y="28" fontSize="7" fontWeight="800" fill={INK} textAnchor="middle">Anycast (1 to nearest)</text>
-      <text x="147" y="42" fontSize="5.5" fill={INK} textAnchor="middle">CDN nearest node</text>
-
       <rect x="10" y="58" width="85" height="42" rx="6" fill={C.mint} stroke={INK} strokeWidth="2" />
       <text x="52" y="76" fontSize="7" fontWeight="800" fill={INK} textAnchor="middle">Multicast (1 to group)</text>
-      <text x="52" y="90" fontSize="5.5" fill={INK} textAnchor="middle">Specific subset of nodes</text>
-
       <rect x="105" y="58" width="85" height="42" rx="6" fill={C.coral} stroke={INK} strokeWidth="2" />
       <text x="147" y="76" fontSize="7" fontWeight="800" fill="#fff" textAnchor="middle">Broadcast (1 to ALL)</text>
-      <text x="147" y="90" fontSize="5.5" fill="#fff" textAnchor="middle">Every node in network</text>
     </svg>
   );
 }
@@ -1111,6 +1036,158 @@ function DiagGoogleFlow() {
 }
 
 /* ======================================================================
+   NEW DBMS & SQL VISUAL DIAGRAMS (FROM PDF NOTES)
+   ====================================================================== */
+
+function DiagERDiagram() {
+  return (
+    <svg viewBox="0 0 200 110" className="w-full h-24">
+      <rect x="80" y="45" width="40" height="24" rx="4" fill={C.coral} stroke={INK} strokeWidth="2.5" />
+      <text x="100" y="60" fontSize="7" fontWeight="800" fill="#fff" textAnchor="middle">Student</text>
+      <ellipse cx="40" cy="30" rx="22" ry="12" fill={C.sun} stroke={INK} strokeWidth="2" />
+      <text x="40" y="32" fontSize="6" fontWeight="800" fill={INK} textAnchor="middle" textDecoration="underline">Roll_no</text>
+      <line x1="58" y1="36" x2="82" y2="48" stroke={INK} strokeWidth="1.8" />
+      <ellipse cx="100" cy="18" rx="18" ry="10" fill={C.sun} stroke={INK} strokeWidth="2" />
+      <text x="100" y="21" fontSize="6" fontWeight="700" fill={INK} textAnchor="middle">Name</text>
+      <line x1="100" y1="28" x2="100" y2="45" stroke={INK} strokeWidth="1.8" />
+      <ellipse cx="160" cy="30" rx="18" ry="10" fill={C.sun} stroke={INK} strokeWidth="2" />
+      <text x="160" y="32" fontSize="6" fontWeight="700" fill={INK} textAnchor="middle">Age</text>
+      <line x1="144" y1="36" x2="118" y2="48" stroke={INK} strokeWidth="1.8" />
+    </svg>
+  );
+}
+
+function DiagStrongWeak() {
+  return (
+    <svg viewBox="0 0 200 110" className="w-full h-24">
+      <rect x="12" y="20" width="75" height="70" rx="8" fill={C.sky} stroke={INK} strokeWidth="2.5" />
+      <text x="50" y="38" fontSize="7.5" fontWeight="800" fill="#fff" textAnchor="middle">Strong Entity</text>
+      <line x1="25" y1="65" x2="75" y2="65" stroke="#fff" strokeWidth="2" />
+      <text x="50" y="60" fontSize="6" fontWeight="700" fill="#fff" textAnchor="middle">Primary Key</text>
+
+      <rect x="112" y="20" width="75" height="70" rx="8" fill={C.pink} stroke={INK} strokeWidth="2.5" />
+      <rect x="116" y="24" width="67" height="62" rx="6" fill="none" stroke={INK} strokeWidth="1.5" strokeDasharray="3 2" />
+      <text x="150" y="38" fontSize="7.5" fontWeight="800" fill={INK} textAnchor="middle">Weak Entity</text>
+      <line x1="125" y1="65" x2="175" y2="65" stroke={INK} strokeWidth="2" strokeDasharray="3 2" />
+      <text x="150" y="60" fontSize="6" fontWeight="700" fill={INK} textAnchor="middle">Discriminator</text>
+    </svg>
+  );
+}
+
+function DiagKeyHierarchy() {
+  return (
+    <svg viewBox="0 0 200 110" className="w-full h-24">
+      <ellipse cx="100" cy="55" rx="90" ry="42" fill={C.sun} stroke={INK} strokeWidth="2.5" />
+      <text x="100" y="22" fontSize="7" fontWeight="800" fill={INK} textAnchor="middle">Super Key</text>
+      <ellipse cx="100" cy="58" rx="64" ry="28" fill={C.sky} stroke={INK} strokeWidth="2.5" />
+      <text x="100" y="40" fontSize="7" fontWeight="800" fill="#fff" textAnchor="middle">Candidate Key</text>
+      <ellipse cx="100" cy="64" rx="38" ry="16" fill={C.coral} stroke={INK} strokeWidth="2.5" />
+      <text x="100" y="67" fontSize="7" fontWeight="800" fill="#fff" textAnchor="middle">Primary Key</text>
+    </svg>
+  );
+}
+
+function DiagNormalizationNested() {
+  return (
+    <svg viewBox="0 0 200 110" className="w-full h-24">
+      <ellipse cx="100" cy="55" rx="88" ry="44" fill={C.sun} stroke={INK} strokeWidth="2.5" />
+      <text x="100" y="20" fontSize="7" fontWeight="800" fill={INK} textAnchor="middle">1NF (Atomic)</text>
+      <ellipse cx="100" cy="58" rx="66" ry="32" fill={C.sky} stroke={INK} strokeWidth="2.5" />
+      <text x="100" y="36" fontSize="7" fontWeight="800" fill="#fff" textAnchor="middle">2NF (No Partial Dep)</text>
+      <ellipse cx="100" cy="62" rx="46" ry="20" fill={C.mint} stroke={INK} strokeWidth="2.5" />
+      <text x="100" y="52" fontSize="6.5" fontWeight="800" fill={INK} textAnchor="middle">3NF (No Transitive)</text>
+      <ellipse cx="100" cy="66" rx="24" ry="10" fill={C.grape} stroke={INK} strokeWidth="2" />
+      <text x="100" y="69" fontSize="6" fontWeight="800" fill="#fff" textAnchor="middle">BCNF</text>
+    </svg>
+  );
+}
+
+function DiagTransactionLifeCycle() {
+  const uid = useId();
+  return (
+    <svg viewBox="0 0 200 110" className="w-full h-24">
+      <defs>
+        <marker id={`${uid}-t`} markerWidth="6" markerHeight="6" refX="4" refY="3" orient="auto">
+          <path d="M0,0L6,3L0,6Z" fill={INK} />
+        </marker>
+      </defs>
+      <rect x="8" y="42" width="40" height="24" rx="6" fill={C.sun} stroke={INK} strokeWidth="2" />
+      <text x="28" y="56" fontSize="6.5" fontWeight="800" fill={INK} textAnchor="middle">Active</text>
+
+      <line x1="48" y1="54" x2="72" y2="54" stroke={INK} strokeWidth="2" markerEnd={`url(#${uid}-t)`} />
+
+      <rect x="74" y="20" width="52" height="22" rx="5" fill={C.sky} stroke={INK} strokeWidth="2" />
+      <text x="100" y="34" fontSize="6" fontWeight="800" fill="#fff" textAnchor="middle">Part. Commit</text>
+
+      <line x1="126" y1="31" x2="148" y2="31" stroke={INK} strokeWidth="2" markerEnd={`url(#${uid}-t)`} />
+
+      <rect x="150" y="20" width="42" height="22" rx="5" fill={C.leaf} stroke={INK} strokeWidth="2" />
+      <text x="171" y="34" fontSize="6" fontWeight="800" fill={INK} textAnchor="middle">Committed</text>
+
+      <line x1="28" y1="66" x2="72" y2="82" stroke={INK} strokeWidth="2" markerEnd={`url(#${uid}-t)`} />
+
+      <rect x="74" y="72" width="52" height="22" rx="5" fill={C.coral} stroke={INK} strokeWidth="2" />
+      <text x="100" y="86" fontSize="6" fontWeight="800" fill="#fff" textAnchor="middle">Failed / Abort</text>
+
+      <line x1="126" y1="83" x2="148" y2="83" stroke={INK} strokeWidth="2" markerEnd={`url(#${uid}-t)`} />
+
+      <rect x="150" y="72" width="42" height="22" rx="5" fill={C.pink} stroke={INK} strokeWidth="2" />
+      <text x="171" y="86" fontSize="6" fontWeight="800" fill={INK} textAnchor="middle">Terminated</text>
+    </svg>
+  );
+}
+
+function DiagACIDMatrix() {
+  return (
+    <svg viewBox="0 0 200 110" className="w-full h-24">
+      <rect x="10" y="10" width="85" height="42" rx="6" fill={C.coral} stroke={INK} strokeWidth="2" />
+      <text x="52" y="28" fontSize="7.5" fontWeight="800" fill="#fff" textAnchor="middle">A - Atomicity</text>
+      <text x="52" y="40" fontSize="5.5" fill="#fff" textAnchor="middle">All or Nothing</text>
+
+      <rect x="105" y="10" width="85" height="42" rx="6" fill={C.sun} stroke={INK} strokeWidth="2" />
+      <text x="147" y="28" fontSize="7.5" fontWeight="800" fill={INK} textAnchor="middle">C - Consistency</text>
+      <text x="147" y="40" fontSize="5.5" fill={INK} textAnchor="middle">Valid State Always</text>
+
+      <rect x="10" y="58" width="85" height="42" rx="6" fill={C.sky} stroke={INK} strokeWidth="2" />
+      <text x="52" y="76" fontSize="7.5" fontWeight="800" fill="#fff" textAnchor="middle">I - Isolation</text>
+      <text x="52" y="88" fontSize="5.5" fill="#fff" textAnchor="middle">Concurrent Safety</text>
+
+      <rect x="105" y="58" width="85" height="42" rx="6" fill={C.leaf} stroke={INK} strokeWidth="2" />
+      <text x="147" y="76" fontSize="7.5" fontWeight="800" fill={INK} textAnchor="middle">D - Durability</text>
+      <text x="147" y="88" fontSize="5.5" fill={INK} textAnchor="middle">Permanent Storage</text>
+    </svg>
+  );
+}
+
+function DiagSQLCategories() {
+  return (
+    <svg viewBox="0 0 200 110" className="w-full h-24">
+      <rect x="8" y="15" width="42" height="80" rx="6" fill={C.sun} stroke={INK} strokeWidth="2" />
+      <text x="29" y="32" fontSize="7" fontWeight="800" fill={INK} textAnchor="middle">DDL</text>
+      <text x="29" y="55" fontSize="5.5" fill={INK} textAnchor="middle">CREATE</text>
+      <text x="29" y="70" fontSize="5.5" fill={INK} textAnchor="middle">ALTER</text>
+      <text x="29" y="85" fontSize="5.5" fill={INK} textAnchor="middle">DROP</text>
+
+      <rect x="56" y="15" width="42" height="80" rx="6" fill={C.sky} stroke={INK} strokeWidth="2" />
+      <text x="77" y="32" fontSize="7" fontWeight="800" fill="#fff" textAnchor="middle">DML</text>
+      <text x="77" y="55" fontSize="5.5" fill="#fff" textAnchor="middle">SELECT</text>
+      <text x="77" y="70" fontSize="5.5" fill="#fff" textAnchor="middle">INSERT</text>
+      <text x="77" y="85" fontSize="5.5" fill="#fff" textAnchor="middle">UPDATE</text>
+
+      <rect x="104" y="15" width="42" height="80" rx="6" fill={C.mint} stroke={INK} strokeWidth="2" />
+      <text x="125" y="32" fontSize="7" fontWeight="800" fill={INK} textAnchor="middle">DCL</text>
+      <text x="125" y="58" fontSize="5.5" fill={INK} textAnchor="middle">GRANT</text>
+      <text x="125" y="75" fontSize="5.5" fill={INK} textAnchor="middle">REVOKE</text>
+
+      <rect x="152" y="15" width="40" height="80" rx="6" fill={C.coral} stroke={INK} strokeWidth="2" />
+      <text x="172" y="32" fontSize="7" fontWeight="800" fill="#fff" textAnchor="middle">TCL</text>
+      <text x="172" y="58" fontSize="5.5" fill="#fff" textAnchor="middle">COMMIT</text>
+      <text x="172" y="75" fontSize="5.5" fill="#fff" textAnchor="middle">ROLLBACK</text>
+    </svg>
+  );
+}
+
+/* ======================================================================
    CONCEPT DATA — Fundamentals, Git, DS, Algorithms, OOP, OS, Networking, React, Web, SQL, Docker
    ====================================================================== */
 
@@ -1119,90 +1196,93 @@ const nid = () => ++_id;
 
 const CONCEPTS = [
   // ---------- Fundamentals ----------
-  { id: nid(), cat: "Fundamentals", term: "Big-O notation", def: "Describes how runtime or memory grows as input size grows, focused on the worst case rather than exact timings.", example: "O(1) < O(log n) < O(n) < O(n log n) < O(n²)", Diagram: DiagBars, dp: { heights: [8, 18, 32, 50, 78], color: C.coral }, link: "https://en.wikipedia.org/wiki/Big_O_notation" },
+  { id: nid(), cat: "Fundamentals", term: "Big-O notation", def: "Describes how runtime or memory grows as input size grows, focused on worst-case performance.", example: "O(1) < O(log n) < O(n) < O(n log n) < O(n²)", Diagram: DiagBars, dp: { heights: [8, 18, 32, 50, 78], color: C.coral }, link: "https://en.wikipedia.org/wiki/Big_O_notation" },
 
-  // ---------- Git ----------
-  { id: nid(), cat: "Git", term: "Working dir → staging → repo", def: "The core Git mental model: edits live in your working directory, `git add` moves a snapshot into the staging area, and `git commit` locks that snapshot into your repo's history.", example: "git status\ngit add index.js\ngit commit -m \"add login form\"", Diagram: DiagGitFlow, dp: {}, link: "https://git-scm.com/book/en/v2/Git-Basics-Recording-Changes-to-the-Repository" },
-  { id: nid(), cat: "Git", term: "git init & git clone", def: "git init turns the current folder into a brand-new Git repository. git clone instead copies an entire existing repository — history and all — from a URL onto your machine.", example: "git init\ngit clone https://github.com/user/repo.git", Diagram: DiagFlow, dp: { steps: ["init", "or clone", "repo"], colors: [C.sun, C.sky, C.leaf] }, link: "https://git-scm.com/docs/git-clone" },
+  // ---------- Git (FULLY PRESERVED & EXPANDED) ----------
+  { id: nid(), cat: "Git", term: "Working dir → staging → repo", def: "The core Git mental model: edits live in working directory, `git add` moves a snapshot into staging, and `git commit` locks snapshot into repo history.", example: "git status\ngit add index.js\ngit commit -m \"add login form\"", Diagram: DiagGitFlow, dp: {}, link: "https://git-scm.com/book/en/v2/Git-Basics-Recording-Changes-to-the-Repository" },
+  { id: nid(), cat: "Git", term: "git init & git clone", def: "git init turns folder into new Git repo. git clone copies an entire existing remote repository onto your machine.", example: "git init\ngit clone https://github.com/user/repo.git", Diagram: DiagFlow, dp: { steps: ["init", "or clone", "repo"], colors: [C.sun, C.sky, C.leaf] }, link: "https://git-scm.com/docs/git-clone" },
+  { id: nid(), cat: "Git", term: "Configuring your identity", def: "Git requires user.name and user.email to author commits.", example: "git config --global user.name \"Alice Dev\"\ngit config --global user.email \"alice@mail.com\"", Diagram: DiagFunctionBox, dp: { inLabel: "name/email", outLabel: "commits", label: "config" }, link: "https://git-scm.com/docs/git-config" },
+  { id: nid(), cat: "Git", term: "Staging & diffing", def: "git diff shows unstaged changes; git diff --staged shows staged changes about to be committed.", example: "git diff\ngit add file.js\ngit diff --staged", Diagram: DiagMagnify, dp: { color: C.sun }, link: "https://git-scm.com/docs/git-diff" },
+  { id: nid(), cat: "Git", term: "Branching & Merging", def: "A branch is a movable commit pointer. git merge integrates commits from another branch into your current branch.", example: "git branch feature\ngit checkout main\ngit merge feature", Diagram: DiagBranchMerge, dp: {}, link: "https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging" },
+  { id: nid(), cat: "Git", term: "Stashing & Rewriting", def: "git stash shelves uncommitted work. git rebase replays commits on top of another branch; git reset rewinds history.", example: "git stash\ngit stash pop\ngit rebase main\ngit reset --hard HEAD~1", Diagram: DiagRewind, dp: {}, link: "https://git-scm.com/docs/git-stash" },
+  { id: nid(), cat: "Git", term: ".gitignore & patterns", def: "Files matching .gitignore patterns are ignored by Git and never committed.", example: "node_modules/\n.env\ndist/", Diagram: DiagIgnore, dp: {}, link: "https://git-scm.com/docs/gitignore" },
 
-  // ---------- COMPUTER NETWORKS (EXPANDED COVER-TO-COVER FROM PDF) ----------
-  { id: nid(), cat: "Networking", term: "Network & Topology Layout", def: "A Network is a collection of devices connected by physical media links to share data. Topology specifies the layout of devices and cables.", example: "Star, Ring, Bus, Mesh, Tree, Hybrid topologies", Diagram: DiagStarTopology, dp: {}, link: "https://en.wikipedia.org/wiki/Network_topology" },
-  { id: nid(), cat: "Networking", term: "Star Topology", def: "All nodes connect to a single central device (Hub/Switch). Highly robust against single cable breaks; if the central device fails, the whole network fails.", example: "Used in most home & office networks. Cable break = only 1 node disconnects.", Diagram: DiagStarTopology, dp: {}, link: "https://en.wikipedia.org/wiki/Star_network" },
-  { id: nid(), cat: "Networking", term: "Ring Topology", def: "Nodes connect in a single continuous circular loop. Data travels in one direction. If a single node is damaged, the entire network fails.", example: "SONET and SDH optical networks. No central server needed.", Diagram: DiagRingTopology, dp: {}, link: "https://en.wikipedia.org/wiki/Ring_network" },
-  { id: nid(), cat: "Networking", term: "Bus Topology", def: "All nodes connect to a single central cable (the bus), which acts as a shared medium. Useful for small networks; bus damage breaks the whole network.", example: "Ethernet 10BASE2 coax networks with terminators at ends.", Diagram: DiagBusTopology, dp: {}, link: "https://en.wikipedia.org/wiki/Bus_network" },
-  { id: nid(), cat: "Networking", term: "Mesh Topology (Fully vs Partially Connected)", def: "Nodes connect directly to other nodes. Fully connected mesh has links between every pair (N*(N-1)/2 cables), ensuring max redundancy and no central failure point.", example: "High cabling cost, extremely robust against cable failure.", Diagram: DiagMeshTopology, dp: {}, link: "https://en.wikipedia.org/wiki/Mesh_networking" },
-  { id: nid(), cat: "Networking", term: "Tree Topology (Expanded Star)", def: "Combines Star and Bus topologies. Star sub-networks connect to a main bus. Segment damage won't affect others, but main bus failure destroys the whole network.", example: "Ethernet protocol used to expand large multi-floor corporate networks.", Diagram: DiagTreeTopology, dp: {} },
-  { id: nid(), cat: "Networking", term: "Hybrid Topology", def: "Combines 2 or more different topologies (e.g. Star + Ring). Offers maximum flexibility to connect distinct network environments.", example: "Connecting a office Star network with a factory Ring network.", Diagram: DiagHybridTopology, dp: {} },
-  { id: nid(), cat: "Networking", term: "Network Types by Area (PAN, LAN, HAN, CAN, MAN, WAN, GAN)", def: "Networks categorized by geographical span: PAN (10m personal), LAN (office/school), HAN (home), CAN (campus), MAN (city), WAN (global/internet), GAN (satellites).", example: "Bluetooth = PAN, Home Wi-Fi = HAN, Office = LAN, Internet = WAN", Diagram: DiagNetworkScale, dp: {} },
-  { id: nid(), cat: "Networking", term: "VPN & Types (Access, Site-to-Site, Intranet, Extranet)", def: "Virtual Private Network creates a secure encrypted tunnel over the public internet (private WAN). Protects confidentiality, disguises online identity, connects remote branches.", example: "Access VPN for remote workers; Site-to-Site for connecting office branches.", Diagram: DiagVPNTunnel, dp: {}, link: "https://en.wikipedia.org/wiki/Virtual_private_network" },
-  { id: nid(), cat: "Networking", term: "IPv4 Addressing & Classes (A, B, C, D, E)", def: "32-bit dynamic address with 4 octets (0-255 each). Categorized into Class A (large), B (medium), C (local/LAN), D (multicast), E (R&D).", example: "Class C: 192.168.1.1. 32 bits total = 4 bytes.", Diagram: DiagIPv4Classes, dp: {}, link: "https://en.wikipedia.org/wiki/IPv4" },
-  { id: nid(), cat: "Networking", term: "OSI Reference Model (7 Layers)", def: "ISO 7-layer architecture for open system communication: Physical, DataLink, Network, Transport, Session, Presentation, Application.", example: "Please Do Not Touch Secret Patient Data (Phys -> App)", Diagram: DiagOSIvsTCPIP, dp: {}, link: "https://en.wikipedia.org/wiki/OSI_model" },
-  { id: nid(), cat: "Networking", term: "OSI Layer 1: Physical Layer", def: "Transmits unstructured raw bit stream over physical media (twisted pair, fiber optic, wireless) using electrical, optical, or mechanical signals.", example: "Cables, RJ45 connectors, fiber optics, wireless radio frequencies.", Diagram: DiagStack, dp: { layers: [{ label: "Raw Bit Transmission", color: C.leaf }] } },
-  { id: nid(), cat: "Networking", term: "OSI Layer 2: Data Link Layer", def: "Transfers frames node-to-node error-free. Handles physical MAC addressing, frame synchronization, flow control, and link management.", example: "Ethernet switches, MAC addresses, framing.", Diagram: DiagHubvsSwitch, dp: {} },
-  { id: nid(), cat: "Networking", term: "OSI Layer 3: Network Layer", def: "Translates logical (IP) to physical address, performs packetizing, fragmentation, internetworking, and determines best route (Routing).", example: "IP Protocol, Routers, ICMP, packet routing.", Diagram: DiagGatewayvsRouter, dp: {} },
-  { id: nid(), cat: "Networking", term: "OSI Layer 4: Transport Layer", def: "Delivers messages end-to-end with error checking. Offers Connection-oriented (TCP with ACK) and Connectionless (UDP without ACK) transmission.", example: "TCP (reliable) vs UDP (fast streaming).", Diagram: DiagCompare, dp: { left: "TCP (ACK)", right: "UDP (No ACK)", colorL: C.sky, colorR: C.coral } },
-  { id: nid(), cat: "Networking", term: "OSI Layer 5, 6, 7: Session, Presentation, Application", def: "Session manages user sessions. Presentation handles character translation, compression, encryption. Application provides network access to users.", example: "HTTP, HTTPS, SMTP, FTP, DNS on Application layer.", Diagram: DiagStack, dp: { layers: [{ label: "Application (HTTP/DNS)", color: C.coral }, { label: "Presentation (Encrypt)", color: C.pink }, { label: "Session (Sync)", color: C.grape }] } },
-  { id: nid(), cat: "Networking", term: "TCP/IP Model (4 Layers)", def: "DoD compressed 4-layer model: Link Layer, Internet Layer (IP, ICMP), Transport Layer (TCP, UDP), Application Layer (HTTP, SMTP, DNS).", example: "De-facto protocol suite powering the global Internet.", Diagram: DiagOSIvsTCPIP, dp: {} },
-  { id: nid(), cat: "Networking", term: "HTTP vs. HTTPS", def: "HTTP (port 80) transmits unencrypted plain text. HTTPS (port 443) adds SSL/TLS protocol layer to encrypt data and authenticate servers securely.", example: "HTTP: port 80 (insecure) | HTTPS: port 443 (SSL/TLS encrypted)", Diagram: DiagHTTPvsHTTPS, dp: {}, link: "https://en.wikipedia.org/wiki/HTTPS" },
-  { id: nid(), cat: "Networking", term: "DNS & Working of DNS", def: "Domain Name System maps human-readable domain names (google.com) to machine IP addresses (142.250.x.x) over UDP port 53.", example: "Browser cache -> OS lookup -> DNS server query -> IP returned", Diagram: DiagDNSFlow, dp: {}, link: "https://en.wikipedia.org/wiki/Domain_Name_System" },
-  { id: nid(), cat: "Networking", term: "DNS Forwarder", def: "A DNS server configured to forward queries it cannot resolve directly to external upstream DNS servers for resolution.", example: "Local router forwarding unresolved DNS requests to 8.8.8.8", Diagram: DiagDNSFlow, dp: {} },
-  { id: nid(), cat: "Networking", term: "SMTP & POP3 Mail Protocols", def: "SMTP (port 25) sends emails server-to-server (End-to-End & Store-Forward). POP3 accesses mail on client machine in Delete or Keep mode.", example: "Sending email = SMTP | Fetching email to client = POP3", Diagram: DiagFlow, dp: { steps: ["Client", "SMTP (25)", "Server", "POP3"], colors: [C.sky, C.sun, C.grape, C.mint] } },
-  { id: nid(), cat: "Networking", term: "TCP vs. UDP", def: "TCP is connection-oriented, reliable, orders packets, and performs flow control. UDP is connectionless, lightweight, fast, with basic checksum error check.", example: "Web/Email = TCP | Video Streaming/Gaming = UDP", Diagram: DiagCompare, dp: { left: "TCP (Reliable)", right: "UDP (Fast)", colorL: C.sky, colorR: C.coral } },
-  { id: nid(), cat: "Networking", term: "TCP 3-Way Handshake", def: "Establishes a reliable connection before data transfer: 1. SYN (Client) -> 2. SYN-ACK (Server) -> 3. ACK (Client).", example: "SYN -> SYN-ACK -> ACK", Diagram: DiagHandshake, dp: {} },
-  { id: nid(), cat: "Networking", term: "DHCP (Port 67) & DORA Process", def: "Dynamic Host Configuration Protocol auto-assigns IP address, subnet mask, default gateway, and DNS to network devices via DORA (Discover, Offer, Request, ACK).", example: "Connecting phone to Wi-Fi -> automatically gets IP 192.168.1.15", Diagram: DiagDHCPDORA, dp: {} },
-  { id: nid(), cat: "Networking", term: "FTP (File Transfer Protocol)", def: "Application layer protocol used to transfer files reliably between client and server. Uses port 21 for control commands and port 20 for data transfer.", example: "Uploading website files to a remote server.", Diagram: DiagFunctionBox, dp: { inLabel: "file", outLabel: "server", label: "FTP (21/20)" } },
-  { id: nid(), cat: "Networking", term: "ICMP (Internet Control Message Protocol)", def: "Network layer protocol (port 7) used by routers and hosts for error handling, network diagnostics, and ping connectivity testing.", example: "`ping 8.8.8.8` sends ICMP Echo Request packets.", Diagram: DiagPlug, dp: { color: C.coral, label: "ICMP Ping / Echo" } },
-  { id: nid(), cat: "Networking", term: "ARP (Address Resolution Protocol)", def: "Network protocol that converts logical IP addresses into physical MAC addresses for local network communication.", example: "Broadcasts: 'Who has 192.168.1.1?' -> Target returns MAC 00:1A:2B:3C...", Diagram: DiagARPRolodex, dp: {} },
-  { id: nid(), cat: "Networking", term: "RIP (Routing Information Protocol)", def: "Dynamic distance-vector routing protocol used by routers to find the best route from source to destination based on Hop Count algorithm.", example: "Selects route with smallest number of router hops.", Diagram: DiagFlow, dp: { steps: ["Router A", "Hop 1", "Hop 2", "Dest"], colors: [C.sky, C.sun, C.leaf, C.grape] } },
-  { id: nid(), cat: "Networking", term: "MAC Address vs. IP Address", def: "MAC address (48-bit) is a permanent physical hardware address burned into the NIC by manufacturer. IP address (32-bit) is a logical network address assigned by ISP.", example: "MAC = NIC hardware ID | IP = Network location", Diagram: DiagCompare, dp: { left: "MAC (Hardware)", right: "IP (Logical)", colorL: C.leaf, colorR: C.sky } },
-  { id: nid(), cat: "Networking", term: "CLI Commands: ipconfig, ifconfig, netstat, ping", def: "ipconfig (Windows) & ifconfig (Mac/Linux) view/configure network interfaces. netstat displays active TCP/IP connections. ping tests host reachability.", example: "`ipconfig /all` | `ifconfig` | `netstat -a` | `ping google.com`", Diagram: DiagFunctionBox, dp: { inLabel: "command", outLabel: "net state", label: "CLI" } },
-  { id: nid(), cat: "Networking", term: "Hub vs. Switch", def: "Hub operates on Layer 1 (Physical) and broadcasts incoming signals to ALL ports (half-duplex). Switch operates on Layer 2 (Data Link), uses MAC table to filter and direct frames (full-duplex).", example: "Hub = dumb splitter | Switch = intelligent bridge", Diagram: DiagHubvsSwitch, dp: {} },
-  { id: nid(), cat: "Networking", term: "Subnetting", def: "Subnetting divides a larger network into smaller subnets to enhance routing efficiency, reduce traffic congestion, and improve security.", example: "Splitting 192.168.1.0/24 into two subnets (/25).", Diagram: DiagNormalize, dp: {} },
-  { id: nid(), cat: "Networking", term: "Gateway vs. Router", def: "Both regulate network traffic. A Router forwards data between TWO SIMILAR networks (e.g. IP to IP), while a Gateway connects TWO DISSIMILAR networks with different protocols.", example: "Router = LAN to LAN | Gateway = IP network to non-IP protocol", Diagram: DiagGatewayvsRouter, dp: {} },
-  { id: nid(), cat: "Networking", term: "Firewall & Security", def: "Network security system monitoring incoming and outgoing traffic, blocking unauthorized access based on predefined security rules.", example: "Hardware appliance or software blocking open vulnerable ports.", Diagram: DiagFirewall, dp: {} },
-  { id: nid(), cat: "Networking", term: "Private vs. Public IP Address", def: "Private IPs (10.x, 172.16-31.x, 192.168.x) are reserved for internal local networks and non-routable on the internet. Public IPs are globally unique and provided by ISP.", example: "Internal PC = 192.168.1.10 (Private) -> Router NAT -> 49.37.x.x (Public)", Diagram: DiagCompare, dp: { left: "Private (LAN)", right: "Public (ISP)", colorL: C.sun, colorR: C.docker } },
-  { id: nid(), cat: "Networking", term: "RAID (Redundant Array of Independent Disks)", def: "Combines multiple physical hard drives into a single logical unit to provide fault tolerance and data redundancy.", example: "RAID 1 (mirroring) ensures system runs even if 1 disk dies.", Diagram: DiagContainers, dp: { withGuestOS: false, count: 3 } },
-  { id: nid(), cat: "Networking", term: "Cast Types (Unicast, Anycast, Multicast, Broadcast)", def: "Transmission modes: Unicast (1 to 1), Anycast (1 to nearest CDN node), Multicast (1 to specific subset), Broadcast (1 to ALL nodes in network).", example: "ARP/DHCP = Broadcast | Web browser = Unicast | CDN = Anycast", Diagram: DiagCastTypes, dp: {} },
-  { id: nid(), cat: "Networking", term: "What happens when you enter google.com in browser?", def: "Step-by-step: 1. Check browser/OS cache -> 2. DNS lookup over UDP -> 3. TCP 3-way handshake -> 4. Send HTTP/HTTPS request -> 5. Web server responds -> 6. Browser decodes & renders page.", example: "Cache -> DNS -> TCP Handshake -> HTTP Request -> Render", Diagram: DiagGoogleFlow, dp: {}, link: "https://en.wikipedia.org/wiki/Web_browser" },
+  // ---------- Docker (FULLY PRESERVED & EXPANDED) ----------
+  { id: nid(), cat: "Docker", term: "What is Docker?", def: "Packages an app with code, runtime, system tools, and libraries into a portable container that runs identically anywhere.", example: "\"Works on my machine\" → Works in container everywhere.", Diagram: DiagContainers, dp: { withGuestOS: false, count: 3 }, link: "https://docs.docker.com/get-started/docker-overview/" },
+  { id: nid(), cat: "Docker", term: "Containers vs. Virtual Machines", def: "Containers share host kernel and only package app layer (lightweight/seconds boot). VMs bundle a full guest OS (heavy/minutes boot).", example: "3 containers share 1 kernel | 3 VMs run 3 guest OSs", Diagram: DiagVMvsContainer, dp: {} },
+  { id: nid(), cat: "Docker", term: "Images vs. Containers", def: "An image is an immutable read-only blueprint (class); a container is a live running instance (object).", example: "docker run -d nginx", Diagram: DiagCompare, dp: { left: "Image", right: "Container", colorL: C.sun, colorR: C.docker } },
+  { id: nid(), cat: "Docker", term: "Dockerfile & Image Layers", def: "Dockerfile instructions build cached read-only image layers step-by-step from a base image.", example: "FROM node:20\nCOPY . .\nRUN npm install\nCMD [\"node\",\"server.js\"]", Diagram: DiagFlow, dp: { steps: ["Dockerfile", "build", "Image"], colors: [C.sun, C.grape, C.docker] } },
+  { id: nid(), cat: "Docker", term: "Volumes & Persistent Storage", def: "Containers are ephemeral. Volumes store data outside the container filesystem so database data persists across container restarts.", example: "docker run -v pgdata:/var/lib/postgresql/data postgres", Diagram: DiagStack, dp: { layers: [{ label: "container (ephemeral)", color: C.pink }, { label: "volume (persists)", color: C.leaf }] } },
+  { id: nid(), cat: "Docker", term: "Docker Compose & Networks", def: "Docker Compose defines multi-container applications in YAML (web + db + redis) and starts them together on an isolated network.", example: "docker compose up -d", Diagram: DiagContainers, dp: { withGuestOS: false, count: 3 } },
+
+  // ---------- COMPUTER NETWORKS (FULL PDF COVERAGE) ----------
+  { id: nid(), cat: "Networking", term: "Network Topologies (Star, Ring, Bus, Mesh, Tree, Hybrid)", def: "Layout specification of nodes and cables. Star (central hub), Ring (token loop), Bus (shared backbone), Mesh (direct links N*(N-1)/2), Tree, and Hybrid.", example: "Star topology used in home Wi-Fi; Ring in SONET; Mesh in high-resiliency data centers.", Diagram: DiagStarTopology, dp: {}, link: "https://en.wikipedia.org/wiki/Network_topology" },
+  { id: nid(), cat: "Networking", term: "Network Types by Area (PAN, LAN, HAN, CAN, MAN, WAN, GAN)", def: "Geographic scale: PAN (10m Bluetooth), LAN (office), HAN (home), CAN (campus), MAN (city), WAN (global/internet), GAN (satellites).", example: "PAN = 10m range | LAN = Office building | WAN = Global Internet", Diagram: DiagNetworkScale, dp: {} },
+  { id: nid(), cat: "Networking", term: "VPN & Secured Tunneling", def: "Virtual Private Network encrypts traffic in a secure tunnel across public Internet. Types: Access VPN (remote users), Site-to-Site (Intranet & Extranet).", example: "AES Encrypted tunnel connecting remote worker to corporate intranet.", Diagram: DiagVPNTunnel, dp: {} },
+  { id: nid(), cat: "Networking", term: "IPv4 Addressing & Classes (A, B, C, D, E)", def: "32-bit (4 octet) address. Class A (1-126 large), Class B (128-191 medium), Class C (192-223 LAN), Class D (224-239 Multicast), Class E (240-254 R&D).", example: "192.168.1.1 is Class C Local Network IP.", Diagram: DiagIPv4Classes, dp: {} },
+  { id: nid(), cat: "Networking", term: "OSI Model (7 Layers) vs TCP/IP (4 Layers)", def: "OSI: Physical, Data Link, Network, Transport, Session, Presentation, Application. TCP/IP: Link, Internet, Transport, Application.", example: "OSI = 7 Layer Standard Reference | TCP/IP = 4 Layer Internet Protocol", Diagram: DiagOSIvsTCPIP, dp: {} },
+  { id: nid(), cat: "Networking", term: "HTTP vs. HTTPS", def: "HTTP (port 80) sends plain unencrypted text. HTTPS (port 443) uses SSL/TLS encryption for confidential data transfer.", example: "HTTP: port 80 (insecure) | HTTPS: port 443 (SSL/TLS encrypted)", Diagram: DiagHTTPvsHTTPS, dp: {} },
+  { id: nid(), cat: "Networking", term: "DNS Lookup & Forwarder", def: "Domain Name System maps domain names to IP addresses over UDP port 53. Forwarder passes unresolved queries to external DNS servers.", example: "google.com → 142.250.x.x", Diagram: DiagDNSFlow, dp: {} },
+  { id: nid(), cat: "Networking", term: "TCP 3-Way Handshake & UDP", def: "TCP establishes connection via SYN → SYN-ACK → ACK (reliable). UDP is connectionless and fast (video calls/gaming).", example: "SYN → SYN-ACK → ACK", Diagram: DiagHandshake, dp: {} },
+  { id: nid(), cat: "Networking", term: "DHCP (Port 67) & DORA Process", def: "Auto-assigns IP addresses and configurations via Discover, Offer, Request, Acknowledge.", example: "Connecting phone to Wi-Fi automatically retrieves local IP.", Diagram: DiagDHCPDORA, dp: {} },
+  { id: nid(), cat: "Networking", term: "ARP Protocol (Address Resolution)", def: "Converts logical IP addresses into physical MAC addresses for local network delivery.", example: "Broadcasts IP query -> Target responds with physical MAC address.", Diagram: DiagARPRolodex, dp: {} },
+  { id: nid(), cat: "Networking", term: "Hub vs. Switch", def: "Hub (Layer 1) broadcasts incoming packets to ALL ports. Switch (Layer 2) inspects MAC address table to route frames to destination port.", example: "Hub = broadcast splitter | Switch = intelligent MAC filtering", Diagram: DiagHubvsSwitch, dp: {} },
+  { id: nid(), cat: "Networking", term: "Gateway vs. Router", def: "Router routes packets between two SIMILAR networks. Gateway bridges two DISSIMILAR networks with different protocol suites.", example: "Router = LAN to LAN | Gateway = IP Network to non-IP System", Diagram: DiagGatewayvsRouter, dp: {} },
+  { id: nid(), cat: "Networking", term: "Firewall & Cast Types", def: "Firewall monitors/blocks unauthorized traffic. Cast types: Unicast (1:1), Anycast (1:nearest), Multicast (1:group), Broadcast (1:all).", example: "Firewall inspects ports | Broadcast sends to all nodes.", Diagram: DiagFirewall, dp: {} },
+  { id: nid(), cat: "Networking", term: "What happens when you type google.com?", def: "1. Browser/OS Cache → 2. DNS Lookup → 3. TCP Handshake → 4. HTTP Request → 5. Server Response → 6. Browser Render.", example: "Cache → DNS → Handshake → Request → Render", Diagram: DiagGoogleFlow, dp: {} },
+
+  // ---------- DBMS & SQL (NEW COVER-TO-COVER EXPANDED FROM PDF 2) ----------
+  { id: nid(), cat: "SQL", term: "Database & DBMS Overview", def: "Database is an organized collection of related real-world data. DBMS software manages storage, security, and retrieval while eliminating file system drawbacks (redundancy, inconsistency, isolation).", example: "MySQL, PostgreSQL, Oracle, SQLite", Diagram: DiagTable, dp: { color: C.leaf } },
+  { id: nid(), cat: "SQL", term: "ER Diagram (Entity Relationship)", def: "Graphical representation of logical database structure consisting of Entity Sets (rectangles), Attributes (ovals), and Relationship Sets (diamonds).", example: "Student (Entity) -- [Roll_no (PK), Name, Age] (Attributes)", Diagram: DiagERDiagram, dp: {}, link: "https://en.wikipedia.org/wiki/Entity%E2%80%93relationship_model" },
+  { id: nid(), cat: "SQL", term: "Strong vs. Weak Entity Set", def: "Strong Entity Set has a Primary Key (solid line underline). Weak Entity Set lacks a primary key and relies on a partial key / discriminator (dashed line underline).", example: "Order (Strong) vs OrderItem (Weak dependent on Order)", Diagram: DiagStrongWeak, dp: {} },
+  { id: nid(), cat: "SQL", term: "Relationships & Cardinality", def: "Relationships connect entities (Unary, Binary, Ternary, N-ary). Cardinality defines max associations: One-to-One (1:1), One-to-Many (1:N), Many-to-One (N:1), Many-to-Many (M:N).", example: "Department 1 : N Employees | Student M : N Courses", Diagram: DiagFlow, dp: { steps: ["1 : 1", "1 : N", "N : 1", "M : N"], colors: [C.sky, C.sun, C.leaf, C.coral] } },
+  { id: nid(), cat: "SQL", term: "Types of Attributes", def: "Simple (indivisible like Age), Composite (Name -> First/Last), Multi-valued (multiple values like Phone Nos), Derived (computed from other attributes like Age from DOB), Key attribute (uniquely identifies tuple).", example: "Derived: Age from DOB | Multi-valued: Email IDs", Diagram: DiagERDiagram, dp: {} },
+  { id: nid(), cat: "SQL", term: "Relational Constraints", def: "Domain constraint (atomic values), Tuple Uniqueness, Key constraint (unique & NOT NULL), Entity Integrity (Primary key not NULL), Referential Integrity (Foreign key must match PK or be NULL).", example: "FOREIGN KEY (dept_id) REFERENCES departments(id)", Diagram: DiagKeyLock, dp: {} },
+  { id: nid(), cat: "SQL", term: "Key Hierarchy (Super, Candidate, Primary, Alternate, Foreign)", def: "Super Key = any set of attributes identifying a tuple. Candidate Key = minimal Super Key. Primary Key = chosen Candidate Key. Alternate Key = unused Candidate Keys.", example: "Super Key ⊃ Candidate Key ⊃ Primary Key", Diagram: DiagKeyHierarchy, dp: {} },
+  { id: nid(), cat: "SQL", term: "Functional Dependencies (Trivial vs Non-Trivial)", def: "α → β holds if tuples with same α value have same β value. Trivial if β ⊆ α. Non-Trivial if β ⊄ α.", example: "(roll_no, name) → roll_no is Trivial | roll_no → name is Non-Trivial", Diagram: DiagFunctionBox, dp: { inLabel: "α", outLabel: "β", label: "α → β" } },
+  { id: nid(), cat: "SQL", term: "Normalization (1NF, 2NF, 3NF, BCNF)", def: "Reduces data redundancy. 1NF: Atomic values. 2NF: No partial dependencies (A→B where A is proper subset of candidate key). 3NF: No transitive dependencies. BCNF: A→B requires A to be a super key.", example: "1NF ⊃ 2NF ⊃ 3NF ⊃ BCNF", Diagram: DiagNormalizationNested, dp: {}, link: "https://en.wikipedia.org/wiki/Database_normalization" },
+  { id: nid(), cat: "SQL", term: "Relation Decomposition (Lossless vs Lossy)", def: "Decomposition breaks relation R into R1..Rn. Lossless ensures R1 ⋈ R2 ⋈ ... ⋈ Rn = R (no data loss). Dependency preservation ensures functional dependencies remain enforceable.", example: "R1 ⋈ R2 = R → Lossless Join Decomposition", Diagram: DiagNormalize, dp: {} },
+  { id: nid(), cat: "SQL", term: "Transaction Life Cycle States", def: "Single logical unit of work operations: Read(A), Write(A). States: Active → Partially Committed → Committed (Permanent Store) OR Failed → Aborted (Rollback) → Terminated.", example: "Active -> Partially Committed -> Committed / Failed -> Aborted", Diagram: DiagTransactionLifeCycle, dp: {}, link: "https://en.wikipedia.org/wiki/Database_transaction" },
+  { id: nid(), cat: "SQL", term: "ACID Properties", def: "Atomicity (all or nothing), Consistency (preserves integrity rules), Isolation (concurrent safety), Durability (permanent write to disk).", example: "Money transfer: subtract from A & add to B atomically.", Diagram: DiagACIDMatrix, dp: {} },
+  { id: nid(), cat: "SQL", term: "Schedules & Serializability", def: "Serial (one by one, strict) vs Non-Serial (concurrent execution). Conflict / View Serializable schedule is equivalent to a serial schedule. Recoverable schedules avoid dirty read errors (Cascading, Cascadeless, Strict).", example: "Strict schedule prevents reading uncommitted written data.", Diagram: DiagFlow, dp: { steps: ["Serial", "Non-Serial", "Serializable", "Strict"], colors: [C.leaf, C.sun, C.sky, C.coral] } },
+  { id: nid(), cat: "SQL", term: "Relational Algebra Operators", def: "Basic: Selection σ, Projection Π, Cross Product X, Union U, Difference -, Rename ρ. Extended: Intersection ∩, Natural Join ⋈, Left/Right/Full Outer Joins, Division /.", example: "σ age > 18 (Students)", Diagram: DiagFunctionBox, dp: { inLabel: "Relation", outLabel: "Result", label: "σ / Π / ⋈" } },
+  { id: nid(), cat: "SQL", term: "Indexes, B-Trees & B+ Trees", def: "Primary Index (ordered PK file), Clustering Index, Secondary Index. B-Trees & B+ Trees keep keys sorted; B+ Trees store data pointers only in leaf nodes for faster shallow search.", example: "B+ Tree: Leaves store all data pointers, non-leaf nodes index keys.", Diagram: DiagTree, dp: {} },
+  { id: nid(), cat: "SQL", term: "SQL Command Categories (DDL, DML, DCL, TCL)", def: "DDL (CREATE, ALTER, DROP, TRUNCATE), DML (SELECT, INSERT, UPDATE, DELETE, MERGE), DCL (GRANT, REVOKE), TCL (COMMIT, ROLLBACK, SAVEPOINT).", example: "CREATE = DDL | SELECT = DML | GRANT = DCL | COMMIT = TCL", Diagram: DiagSQLCategories, dp: {} },
+  { id: nid(), cat: "SQL", term: "SQL Joins (INNER, LEFT, RIGHT, FULL, CROSS)", def: "Combines tables on foreign key match. INNER (matches both), LEFT (all left + matching right), RIGHT (all right + matching left), FULL (all rows), CROSS (Cartesian m*n).", example: "SELECT * FROM orders INNER JOIN customers ON orders.cust_id = customers.id;", Diagram: DiagVenn, dp: { mode: "inner", color: C.leaf } },
+  { id: nid(), cat: "SQL", term: "Aggregate Functions & GROUP BY / HAVING", def: "MIN(), MAX(), COUNT(), AVG(), SUM(). GROUP BY buckets rows. HAVING filters aggregated bucket results (WHERE applies before HAVING).", example: "SELECT dept, COUNT(*) FROM emp GROUP BY dept HAVING COUNT(*) > 5;", Diagram: DiagBucket, dp: {} },
+  { id: nid(), cat: "SQL", term: "SQL Wildcards & LIKE Operator", def: "LIKE searches patterns: % (0+ characters), _ (exactly 1 character).", example: "WHERE name LIKE 'A%' (starts with A) | WHERE name LIKE '_r%' (second char r)", Diagram: DiagMagnify, dp: { color: C.sun } },
 
   // ---------- OS ----------
-  { id: nid(), cat: "OS", term: "Process vs. thread", def: "A process is an independent running program with its own memory. A thread is a lighter unit of execution inside a process that shares memory with sibling threads.", example: "Browser tabs = separate processes. Workers inside 1 tab = threads.", Diagram: DiagCompare, dp: { left: "Process", right: "Thread", colorL: C.sky, colorR: C.grape }, link: "https://en.wikipedia.org/wiki/Thread_(computing)" },
+  { id: nid(), cat: "OS", term: "Process vs. thread", def: "Process = independent program with memory space. Thread = lightweight unit inside process sharing memory.", example: "Browser tabs = processes | Render threads = threads", Diagram: DiagCompare, dp: { left: "Process", right: "Thread", colorL: C.sky, colorR: C.grape } },
 
   // ---------- Data Structures ----------
-  { id: nid(), cat: "Data Structures", term: "Arrays vs. linked lists", def: "Arrays store items contiguously for O(1) index access but O(n) middle inserts. Linked lists trade that for O(1) inserts once you hold a pointer to the spot.", example: "Need random access → array. Frequent inserts/removes → linked list.", Diagram: DiagCompare, dp: { left: "Array", right: "Linked List", colorL: C.sky, colorR: C.coral } },
+  { id: nid(), cat: "Data Structures", term: "Arrays vs. linked lists", def: "Arrays give O(1) index access but O(n) insert. Linked lists give O(1) insert once pointer is positioned.", example: "Random access → Array | Frequent inserts → Linked List", Diagram: DiagCompare, dp: { left: "Array", right: "Linked List", colorL: C.sky, colorR: C.coral } },
 
   // ---------- Algorithms ----------
-  { id: nid(), cat: "Algorithms", term: "Two pointers", def: "Move two indices through a structure — often from opposite ends — to avoid nested loops when data is sorted or has a known shape.", example: "let l = 0, r = arr.length - 1;\nwhile (l < r) {\n  const sum = arr[l] + arr[r];\n  if (sum === target) return [l, r];\n  sum < target ? l++ : r--;\n}", Diagram: DiagPointers, dp: {} },
+  { id: nid(), cat: "Algorithms", term: "Two pointers", def: "Move two indices through array to solve problems in O(n) without nested loops.", example: "let l=0, r=n-1; while(l<r) { ... }", Diagram: DiagPointers, dp: {} },
 
   // ---------- OOP ----------
-  { id: nid(), cat: "OOP", term: "Encapsulation", def: "Bundles data together with the methods that operate on it, and hides the internal state behind a controlled, public interface.", example: "class Account { #balance=0; deposit(n){ this.#balance+=n; } }", Diagram: DiagCapsule, dp: {} },
+  { id: nid(), cat: "OOP", term: "Encapsulation & Polymorphism", def: "Encapsulation hides state behind public interface. Polymorphism allows subclass methods to override parent behavior.", example: "class Dog extends Animal { speak(){ return 'Woof'; } }", Diagram: DiagPoly, dp: {} },
 
   // ---------- React ----------
-  { id: nid(), cat: "React", term: "useState vs. useReducer", def: "useState is simplest for independent values. useReducer shines once you have several related state fields or many action types touching the same state.", example: "const [count, setCount] = useState(0);", Diagram: DiagCompare, dp: { left: "useState", right: "useReducer", colorL: C.sky, colorR: C.grape } },
-
-  // ---------- SQL ----------
-  { id: nid(), cat: "SQL", term: "INNER JOIN vs LEFT JOIN", def: "INNER JOIN returns only matching rows in both tables. LEFT JOIN returns all rows from the left table, filling NULLs for missing right matches.", example: "SELECT * FROM a LEFT JOIN b ON a.id = b.a_id;", Diagram: DiagVenn, dp: { mode: "left", color: C.sky } },
-
-  // ---------- Docker ----------
-  { id: nid(), cat: "Docker", term: "Images vs. containers", def: "An image is a read-only blueprint (like a class); a container is a running instance of that image (like an object).", example: "docker run nginx", Diagram: DiagCompare, dp: { left: "Image", right: "Container", colorL: C.sun, colorR: C.docker } }
+  { id: nid(), cat: "React", term: "useState vs. useReducer", def: "useState is best for simple values. useReducer centralizes state transitions when logic is complex.", example: "const [state, dispatch] = useReducer(reducer, initial);", Diagram: DiagCompare, dp: { left: "useState", right: "useReducer", colorL: C.sky, colorR: C.grape } }
 ];
 
 const CATEGORIES = ["All", ...CATEGORY_NAMES];
 
 /* ======================================================================
-   NEW INTERACTIVE VISUAL NETWORK LAB
+   INTERACTIVE VISUAL NETWORK LAB
    ====================================================================== */
 
 function NetworkVisualLab() {
   const [selectedTop, setSelectedTop] = useState("Star");
   const [failedNode, setFailedNode] = useState(null);
-  const [packetStep, setPacketStep] = useState(0);
 
   const topologies = [
-    { name: "Star", desc: "Nodes connect to central switch. Robust against single node cable cuts, but central switch failure downs network.", color: C.sun },
+    { name: "Star", desc: "Nodes connect to central switch. Robust against single cable cuts, but central switch failure downs network.", color: C.sun },
     { name: "Ring", desc: "Nodes connect in a circle. Single cut breaks whole ring flow.", color: C.grape },
     { name: "Bus", desc: "Single backbone cable. Backbone break cuts entire network.", color: C.amber },
-    { name: "Mesh", desc: "Direct links between every node N(N-1)/2 direct links. Max fault tolerance.", color: C.coral }
+    { name: "Mesh", desc: "Direct links between every node (N*(N-1)/2). Max fault tolerance.", color: C.coral }
   ];
 
   return (
@@ -1212,10 +1292,9 @@ function NetworkVisualLab() {
         <h1 className="font-display text-2xl font-extrabold" style={{ color: INK }}>Interactive Visual Network Lab</h1>
       </div>
       <p className="font-code text-[13px] mb-6" style={{ color: C.textMuted }}>
-        // Visual thinker interactive sandbox — toggle topology modes, simulate node failures & trace packets in real-time
+        // Visual thinker interactive sandbox — toggle topology modes, simulate node failures & trace network impact
       </p>
 
-      {/* Mode Selector */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
         {topologies.map((t) => (
           <button
@@ -1234,7 +1313,6 @@ function NetworkVisualLab() {
         ))}
       </div>
 
-      {/* Interactive Visualizer Canvas */}
       <div className="rounded-3xl p-6 mb-6 sticker" style={{ backgroundColor: C.card, border: `3.5px solid ${INK}` }}>
         <div className="flex flex-col sm:flex-row items-center justify-between mb-4">
           <div>
@@ -1250,15 +1328,12 @@ function NetworkVisualLab() {
           </button>
         </div>
 
-        {/* Live Dynamic SVG Diagram Canvas */}
         <div className="w-full h-64 bg-slate-900 rounded-2xl relative overflow-hidden flex items-center justify-center p-4">
           <svg viewBox="0 0 400 220" className="w-full h-full">
             {selectedTop === "Star" && (
               <g>
-                {/* Central Switch */}
                 <rect x="180" y="90" width="40" height="40" rx="8" fill={failedNode === "central" ? C.coral : C.amber} stroke="#fff" strokeWidth="2.5" />
                 <text x="200" y="114" fontSize="10" fontWeight="900" fill="#fff" textAnchor="middle">HUB</text>
-                {/* Outer Nodes */}
                 {[
                   { id: 1, x: 80, y: 40 },
                   { id: 2, x: 320, y: 40 },
@@ -1507,35 +1582,35 @@ function TabBar({ active, setActive }) {
    ====================================================================== */
 
 const STATS = [
-  { label: "Topics mastered", value: "48", total: "/ 120", icon: BookOpen, color: C.sun },
+  { label: "Topics mastered", value: "62", total: "/ 140", icon: BookOpen, color: C.sun },
   { label: "Problems solved", value: "95", total: "total", icon: Code2, color: C.mint },
-  { label: "Avg assessment score", value: "84", total: "%", icon: ClipboardCheck, color: C.sky },
+  { label: "Avg assessment score", value: "88", total: "%", icon: ClipboardCheck, color: C.sky },
   { label: "Current streak", value: "12", total: "days", icon: Flame, color: C.coral },
 ];
 
 const PROGRESS = [
+  { name: "DBMS & SQL: ER Diagrams & Normalization", pct: 95, color: C.leaf },
   { name: "Computer Networks: Topologies & OSI", pct: 90, color: C.amber },
-  { name: "Networking: TCP/UDP & Protocols", pct: 85, color: C.sun },
-  { name: "Arrays & Strings", pct: 80, color: C.mint },
-  { name: "Git & Version Control", pct: 75, color: C.rust },
-  { name: "SQL & Databases", pct: 70, color: C.leaf },
-  { name: "React: Hooks & State", pct: 65, color: C.cyan },
-  { name: "OS: Threads & Scheduling", pct: 50, color: C.mint },
-  { name: "Docker & DevOps", pct: 40, color: C.docker },
+  { name: "Git & Version Control", pct: 85, color: C.rust },
+  { name: "Docker & DevOps Containers", pct: 80, color: C.docker },
+  { name: "Arrays, Strings & Pointers", pct: 80, color: C.mint },
+  { name: "React: Hooks & State Management", pct: 70, color: C.cyan },
+  { name: "OS: Threads, Scheduling & Lifecycle", pct: 60, color: C.mint },
 ];
 
 const SCHEDULE = [
-  { title: "Visual Lab — Topologies & Packet Flows", when: "Today", date: "Aug 10", color: C.amber },
-  { title: "Mock Interview — Computer Networks", when: "Tomorrow", date: "Aug 11", color: C.sky },
-  { title: "OA practice — Arrays & Strings", when: "in 2 days", date: "Aug 12", color: C.mint },
-  { title: "Assessment review — TCP/IP & VPN", when: "in 4 days", date: "Aug 14", color: C.coral },
+  { title: "DBMS & SQL — Normalization & ER Diagrams", when: "Today", date: "Aug 10", color: C.leaf },
+  { title: "Visual Network Lab — Topologies & Packets", when: "Tomorrow", date: "Aug 11", color: C.amber },
+  { title: "Docker & Git — Containers & Rebasing", when: "in 2 days", date: "Aug 12", color: C.docker },
+  { title: "Assessment — Transactions & ACID Check", when: "in 4 days", date: "Aug 14", color: C.coral },
 ];
 
 const RECOMMENDED = [
-  { title: "Computer Networks: Star vs Mesh", tag: "Networking", desc: "Visual comparison of star topology hubs vs mesh redundancy cables." },
-  { title: "OSI 7 Layers vs TCP/IP 4 Layers", tag: "Networking", desc: "Understand how Physical-to-App maps directly to Link-Internet-Transport-App." },
-  { title: "DNS resolution & DORA flow", tag: "Networking", desc: "Trace what happens when typing google.com and how DHCP assigns IP addresses." },
-  { title: "Hub vs. Switch (Layer 1 vs Layer 2)", tag: "Networking", desc: "Why switches filter packets with MAC address tables while hubs broadcast." },
+  { title: "ER Diagrams: Entities, Attributes & Keys", tag: "SQL", desc: "Visual guide to Strong vs Weak Entities and Primary/Partial Keys." },
+  { title: "Database Normalization (1NF → 2NF → 3NF → BCNF)", tag: "SQL", desc: "Master nested normalization rules to eliminate partial and transitive dependencies." },
+  { title: "Transaction Life Cycle & ACID Matrix", tag: "SQL", desc: "Trace Active → Committed states and Atomicity, Consistency, Isolation, Durability." },
+  { title: "Git: Rebase vs. Merge & Stashing", tag: "Git", desc: "Clean branch management, stashing uncommitted work, and rewinding history." },
+  { title: "Docker: Containers vs. Virtual Machines", tag: "Docker", desc: "Shared OS kernel containers vs heavy hypervisor Guest OS virtual machines." }
 ];
 
 function Dashboard({ goTo }) {
@@ -1544,9 +1619,9 @@ function Dashboard({ goTo }) {
       <div className="mb-8 flex items-center gap-4">
         <Mascot size={56} />
         <div>
-          <h1 className="font-display text-2xl font-extrabold" style={{ color: INK }}>Good day, Visual Thinker!</h1>
+          <h1 className="font-display text-2xl font-extrabold" style={{ color: INK }}>Welcome, Visual Learner!</h1>
           <p className="font-code text-[13px] mt-1" style={{ color: C.textMuted }}>
-            // Computer Networks curriculum loaded — 12-day streak, diagrams ready
+            // DBMS & SQL notes + Computer Networks + Git + Docker visual curriculum fully active
           </p>
         </div>
       </div>
@@ -1621,8 +1696,8 @@ function Dashboard({ goTo }) {
       </div>
 
       <div className="mt-5">
-        <SectionLabel icon={Sparkles}>Recommended next (Computer Networks Spotlight)</SectionLabel>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <SectionLabel icon={Sparkles}>Recommended visual study cards</SectionLabel>
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
           {RECOMMENDED.map((r, i) => (
             <motion.div
               key={r.title}
@@ -1678,7 +1753,7 @@ function FlashCard({ item, index, flipped, onFlip }) {
           </div>
           <div>
             <p className="text-[14px] font-ui font-bold leading-tight" style={{ color: INK }}>{item.term}</p>
-            <p className="font-code text-[10.5px] mt-1" style={{ color: C.textMuted }}>tap to flip for details &rarr;</p>
+            <p className="font-code text-[10.5px] mt-1" style={{ color: C.textMuted }}>tap card to flip for details &rarr;</p>
           </div>
         </div>
         {/* back: text */}
@@ -1727,7 +1802,7 @@ function ConceptLibrary() {
     <div className="p-5 md:p-8 max-w-6xl mx-auto">
       <h1 className="font-display text-xl font-extrabold mb-1" style={{ color: INK }}>Visual Concept Library</h1>
       <p className="font-code text-[13px] mb-6" style={{ color: C.textMuted }}>
-        // {filtered.length} of {CONCEPTS.length} topics — interactive visual diagrams on every card
+        // {filtered.length} of {CONCEPTS.length} topics — custom visual SVG diagrams on every single card
       </p>
 
       <div className="flex flex-col sm:flex-row gap-3 mb-5">
@@ -1736,7 +1811,7 @@ function ConceptLibrary() {
           <input
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search: OSI, TCP, UDP, Star, Mesh, VPN, DNS, Hub, Switch..."
+            placeholder="Search: ER Diagram, 3NF, BCNF, ACID, Git, Docker, OSI, TCP..."
             className="bg-transparent outline-none flex-1 text-[13px] font-ui"
             style={{ color: INK }}
           />
@@ -1769,7 +1844,7 @@ function ConceptLibrary() {
 
       {filtered.length === 0 ? (
         <div className="rounded-3xl p-8 text-center sticker" style={{ backgroundColor: C.card, border: `3px solid ${INK}` }}>
-          <p className="text-[13px] font-ui" style={{ color: C.textMuted }}>No concepts match "{query}". Try searching for 'OSI', 'Star', or 'TCP'.</p>
+          <p className="text-[13px] font-ui" style={{ color: C.textMuted }}>No concepts match "{query}". Try searching for 'ER', 'Normalization', or 'Git'.</p>
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -1859,7 +1934,7 @@ function PracticeArena() {
     <div className="p-5 md:p-8 max-w-6xl mx-auto">
       <h1 className="font-display text-xl font-extrabold mb-1" style={{ color: INK }}>Practice arena</h1>
       <p className="font-code text-[13px] mb-6" style={{ color: C.textMuted }}>
-        // code runs entirely in your browser — nothing is sent to a server, no keys involved
+        // code runs entirely in your browser — nothing is sent to a server
       </p>
 
       <div className="flex flex-col lg:flex-row gap-5">
@@ -1926,22 +2001,20 @@ function PracticeArena() {
 }
 
 /* ======================================================================
-   ASSESSMENT MODE (UPDATED WITH COMPUTER NETWORKS QUESTIONS FROM PDF)
+   ASSESSMENT MODE (DBMS, SQL, NETWORKING, GIT, DOCKER)
    ====================================================================== */
 
 const QUESTIONS = [
-  { q: "In Star topology, what happens if the central device (Hub/Switch) fails?", options: ["Only 1 node disconnects", "The entire network fails", "Nodes auto-switch to Ring mode", "No effect"], correct: 1, explain: "Star topology relies entirely on the central hub/switch. If the central device fails, communication between all connected nodes collapses." },
-  { q: "How many layers are in the standard OSI Reference Model?", options: ["4", "5", "7", "9"], correct: 2, explain: "The OSI model consists of 7 layers: Physical, Data Link, Network, Transport, Session, Presentation, Application." },
-  { q: "Which Layer 2 device uses a MAC address table to direct frames to specific ports?", options: ["Hub", "Switch", "Repeater", "Modem"], correct: 1, explain: "A Switch operates at Layer 2 (Data Link) and filters/directs network frames to target ports using MAC addresses, unlike a Hub which broadcasts." },
-  { q: "What default port is used by HTTPS for secure encrypted communication?", options: ["Port 80", "Port 21", "Port 443", "Port 25"], correct: 2, explain: "HTTP uses port 80 by default, while HTTPS uses port 443 with SSL/TLS encryption." },
-  { q: "Which IPv4 address class range is 192.0.0.0 to 223.255.255.255?", options: ["Class A", "Class B", "Class C", "Class D"], correct: 2, explain: "Class C IPv4 addresses start with octets 192 to 223 and are commonly used for local area networks." },
-  { q: "What protocol automatically assigns IP addresses, subnet masks, and gateways via DORA?", options: ["DNS", "DHCP", "ARP", "ICMP"], correct: 1, explain: "DHCP (Dynamic Host Configuration Protocol) automatically auto-configures IP settings on client devices." },
-  { q: "What is the primary function of Address Resolution Protocol (ARP)?", options: ["Encrypt web traffic", "Convert logical IP addresses to physical MAC addresses", "Route packets between cities", "Assign domain names"], correct: 1, explain: "ARP maps a device's 32-bit IP address to its physical 48-bit MAC address on local networks." },
-  { q: "Which transport layer protocol is connection-oriented and guarantees packet delivery?", options: ["UDP", "TCP", "IP", "ICMP"], correct: 1, explain: "TCP provides reliable, connection-oriented data transfer with sequence numbers and ACKs, whereas UDP is connectionless." },
-  { q: "What command in Mac/Linux is used to view and configure network interfaces?", options: ["ipconfig", "ifconfig", "netstat", "ping"], correct: 1, explain: "`ifconfig` is used in Mac/Unix/Linux systems, while `ipconfig` is used in Microsoft Windows." },
-  { q: "Which network device connects TWO DISSIMILAR networks with different protocols?", options: ["Switch", "Router", "Gateway", "Hub"], correct: 2, explain: "A Router sends data between similar networks, whereas a Gateway converts and routes traffic between dissimilar networks." },
-  { q: "What does `git stash` do?", options: ["Deletes uncommitted changes permanently", "Shelves uncommitted changes so you can switch branches cleanly", "Creates a new branch", "Undoes the last commit"], correct: 1, explain: "git stash saves modified and staged changes off to the side, restoring a clean working directory until you pop them back." },
-  { q: "Which ACID guarantee ensures a transaction either completes fully or leaves the database untouched?", options: ["Atomicity", "Consistency", "Isolation", "Durability"], correct: 0, explain: "Atomicity ensures all statements in a transaction are executed as a single all-or-nothing unit." }
+  { q: "In an ER diagram, what symbol is used to represent an Entity Set?", options: ["Oval", "Rectangle", "Diamond", "Dashed Circle"], correct: 1, explain: "In ER diagrams, Rectangles represent Entity Sets, Ovals represent Attributes, and Diamonds represent Relationship Sets." },
+  { q: "Which Normal Form removes transitive functional dependencies (where non-key A → B)?", options: ["1NF", "2NF", "3NF", "BCNF"], correct: 2, explain: "3NF requires a relation to be in 2NF and have no transitive dependencies on non-prime attributes." },
+  { q: "In Star topology, what happens if the central device (Hub/Switch) fails?", options: ["Only 1 node disconnects", "The entire network fails", "Nodes auto-switch to Ring mode", "No effect"], correct: 1, explain: "Star topology depends on the central hub/switch. Central failure downs all communication." },
+  { q: "Which ACID property guarantees that a transaction executes completely or not at all?", options: ["Atomicity", "Consistency", "Isolation", "Durability"], correct: 0, explain: "Atomicity ensures all-or-nothing execution." },
+  { q: "How many layers are in the standard OSI Reference Model?", options: ["4", "5", "7", "9"], correct: 2, explain: "OSI has 7 layers: Physical, Data Link, Network, Transport, Session, Presentation, Application." },
+  { q: "In Docker, what is the difference between an Image and a Container?", options: ["No difference", "Container is read-only blueprint, Image is live", "Image is immutable blueprint, Container is live running instance", "Images require VM hypervisor"], correct: 2, explain: "An Image is a read-only blueprint; a Container is a live running instance." },
+  { q: "What does `git stash` do?", options: ["Deletes uncommitted changes permanently", "Shelves uncommitted changes so you can switch branches cleanly", "Creates a new branch", "Undoes the last commit"], correct: 1, explain: "git stash saves uncommitted modifications off to the side so you get a clean working tree." },
+  { q: "Which SQL clause filters records AFTER aggregation with GROUP BY?", options: ["WHERE", "HAVING", "ORDER BY", "LIMIT"], correct: 1, explain: "WHERE filters rows before aggregation; HAVING filters aggregated bucket results after GROUP BY." },
+  { q: "What default port is used by HTTPS for secure encrypted communication?", options: ["Port 80", "Port 21", "Port 443", "Port 25"], correct: 2, explain: "HTTP uses port 80; HTTPS uses port 443 with SSL/TLS encryption." },
+  { q: "What is a Weak Entity Set in DBMS?", options: ["An entity set without primary key that relies on a partial key/discriminator", "An entity with no attributes", "A table with no foreign keys", "A view with no data"], correct: 0, explain: "Weak entity sets cannot be uniquely identified by their own attributes alone and rely on a partial key (discriminator)." }
 ];
 
 const QUIZ_SECONDS = 360;
@@ -1972,16 +2045,16 @@ function AssessmentMode() {
     return (
       <div className="p-5 md:p-8 max-w-2xl mx-auto">
         <h1 className="font-display text-xl font-extrabold mb-1" style={{ color: INK }}>Assessment mode</h1>
-        <p className="font-code text-[13px] mb-6" style={{ color: C.textMuted }}>// quiz.test.js — updated with Computer Networks module</p>
+        <p className="font-code text-[13px] mb-6" style={{ color: C.textMuted }}>// quiz.test.js — updated with DBMS, SQL, Computer Networks, Git & Docker</p>
         <div className="rounded-3xl p-6 sticker" style={{ backgroundColor: C.card, border: `3px solid ${INK}` }}>
           <div className="flex items-center gap-2 mb-3">
             <ShieldCheck size={18} style={{ color: C.sky }} />
             <p className="text-[15px] font-ui font-bold" style={{ color: INK }}>Timed knowledge check</p>
           </div>
           <ul className="text-[13px] leading-relaxed font-ui" style={{ color: C.textMuted }}>
-            <li>&bull; {QUESTIONS.length} multiple-choice questions covering Computer Networks, Git, SQL, and CS Core</li>
-            <li>&bull; {Math.floor(QUIZ_SECONDS / 60)} minutes on the clock for the full set</li>
-            <li>&bull; Instant scoring & detailed visual explanations after you submit</li>
+            <li>&bull; {QUESTIONS.length} multiple-choice questions covering DBMS, SQL, Computer Networks, Git & Docker</li>
+            <li>&bull; {Math.floor(QUIZ_SECONDS / 60)} minutes on the clock</li>
+            <li>&bull; Instant scoring & detailed visual explanations after submission</li>
           </ul>
           <motion.button whileTap={{ scale: 0.95 }} onClick={start} className="flex items-center gap-1.5 mt-5 px-5 py-2.5 rounded-full text-[13px] font-ui font-bold sticker-sm" style={{ backgroundColor: C.coral, color: INK, border: `2.5px solid ${INK}` }}>
             Start assessment <ArrowRight size={13} />
