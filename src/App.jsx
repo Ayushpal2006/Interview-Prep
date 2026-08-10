@@ -61,7 +61,6 @@ const NAV_ITEMS = [
 function GlobalStyle() {
   return (
     <style>{`
-      @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
       .font-display { font-family: 'Baloo 2', 'Inter', system-ui, sans-serif; }
       .font-ui { font-family: 'Inter', system-ui, sans-serif; }
       .font-code { font-family: 'JetBrains Mono', ui-monospace, monospace; }
@@ -90,8 +89,19 @@ function Mascot({ size = 42 }) {
 }
 
 /* ======================================================================
-   VISUAL SVG DIAGRAM COMPONENTS
+   VISUAL SVG DIAGRAM COMPONENTS (FULL MASTER SET)
    ====================================================================== */
+
+function DiagBars({ heights = [10, 22, 38, 58, 82], color = C.coral }) {
+  return (
+    <svg viewBox="0 0 200 110" className="w-full h-24">
+      <line x1="15" y1="95" x2="190" y2="95" stroke={INK} strokeWidth="3" />
+      {heights.map((h, i) => (
+        <rect key={i} x={25 + i * 33} y={95 - h} width="21" height={h} rx="4" fill={color} stroke={INK} strokeWidth="2.5" />
+      ))}
+    </svg>
+  );
+}
 
 function DiagTable({ color = C.sky }) {
   return (
@@ -371,10 +381,6 @@ function DiagClassObject() {
   );
 }
 
-/* ======================================================================
-   NEW OPERATING SYSTEMS (OS) VISUAL DIAGRAMS (FROM PDF NOTES)
-   ====================================================================== */
-
 function DiagOSTypes() {
   const types = ["Batch", "MultiProg", "MultiTask", "TimeShare", "RTOS"];
   return (
@@ -545,7 +551,7 @@ const nid = () => ++_id;
 
 const CONCEPTS = [
   // ---------- Fundamentals ----------
-  { id: nid(), cat: "Fundamentals", term: "Big-O notation", def: "Describes how runtime or memory grows as input size grows, focused on worst-case performance.", example: "O(1) < O(log n) < O(n) < O(n log n) < O(n²)", Diagram: DiagTable, dp: { color: C.coral }, link: "https://en.wikipedia.org/wiki/Big_O_notation" },
+  { id: nid(), cat: "Fundamentals", term: "Big-O notation", def: "Describes how runtime or memory grows as input size grows, focused on worst-case performance.", example: "O(1) < O(log n) < O(n) < O(n log n) < O(n²)", Diagram: DiagBars, dp: { heights: [8, 18, 32, 50, 78], color: C.coral }, link: "https://en.wikipedia.org/wiki/Big_O_notation" },
 
   // ---------- Git (FULLY PRESERVED) ----------
   { id: nid(), cat: "Git", term: "Working dir → staging → repo", def: "Edits live in working directory, `git add` stages snapshot, `git commit` locks snapshot into repo history.", example: "git status\ngit add index.js\ngit commit -m \"add login form\"", Diagram: DiagGitFlow, dp: {}, link: "https://git-scm.com/book/en/v2/Git-Basics-Recording-Changes-to-the-Repository" },
