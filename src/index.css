@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+.font-display { font-family: 'Baloo 2', 'Inter', system-ui, sans-serif; }
+.font-ui { font-family: 'Inter', system-ui, sans-serif; }
+.font-code { font-family: 'JetBrains Mono', ui-monospace, monospace; }
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #FDF6EC;
+}
+
+#root {
+  min-height: 100vh;
+}
