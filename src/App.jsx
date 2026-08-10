@@ -294,19 +294,6 @@ function DiagVMvsContainer() {
   );
 }
 
-function DiagPlug({ color = C.docker, label = "network" }) {
-  return (
-    <svg viewBox="0 0 200 110" className="w-full h-24">
-      <rect x="20" y="35" width="46" height="40" rx="8" fill={color} stroke={INK} strokeWidth="3" />
-      <rect x="134" y="35" width="46" height="40" rx="8" fill={color} stroke={INK} strokeWidth="3" />
-      <circle cx="100" cy="55" r="7" fill={INK} />
-      <line x1="66" y1="55" x2="93" y2="55" stroke={INK} strokeWidth="3" strokeDasharray="4 4" />
-      <line x1="107" y1="55" x2="134" y2="55" stroke={INK} strokeWidth="3" strokeDasharray="4 4" />
-      <text x="100" y="98" fontSize="8.5" fontWeight="700" fill={INK} textAnchor="middle">{label}</text>
-    </svg>
-  );
-}
-
 function DiagStarTopology() {
   return (
     <svg viewBox="0 0 200 110" className="w-full h-24">
@@ -317,65 +304,6 @@ function DiagStarTopology() {
           <line x1="100" y1="55" x2={x} y2={y} stroke={INK} strokeWidth="2.5" />
           <rect x={x - 12} y={y - 9} width="24" height="18" rx="4" fill={C.sky} stroke={INK} strokeWidth="2" />
           <text x={x} y={y + 3} fontSize="6" fontWeight="700" fill="#fff" textAnchor="middle">N{i + 1}</text>
-        </g>
-      ))}
-      <text x="100" y="14" fontSize="7" fontWeight="800" fill={INK} textAnchor="middle">Centralized Star</text>
-    </svg>
-  );
-}
-
-function DiagRingTopology() {
-  return (
-    <svg viewBox="0 0 200 110" className="w-full h-24">
-      <circle cx="100" cy="55" r="34" fill="none" stroke={C.grape} strokeWidth="3" strokeDasharray="4 2" />
-      {[0, 60, 120, 180, 240, 300].map((deg, i) => {
-        const rad = (deg * Math.PI) / 180;
-        const x = 100 + 34 * Math.cos(rad);
-        const y = 55 + 34 * Math.sin(rad);
-        return (
-          <g key={i}>
-            <circle cx={x} cy={y} r="9" fill={C.mint} stroke={INK} strokeWidth="2" />
-            <text x={x} y={y + 3} fontSize="6" fontWeight="800" fill={INK} textAnchor="middle">{i + 1}</text>
-          </g>
-        );
-      })}
-    </svg>
-  );
-}
-
-function DiagBusTopology() {
-  return (
-    <svg viewBox="0 0 200 110" className="w-full h-24">
-      <line x1="15" y1="55" x2="185" y2="55" stroke={INK} strokeWidth="4" />
-      {[35, 75, 125, 165].map((x, i) => {
-        const isTop = i % 2 === 0;
-        const y = isTop ? 22 : 88;
-        const lineY = isTop ? 34 : 76;
-        return (
-          <g key={i}>
-            <line x1={x} y1="55" x2={x} y2={lineY} stroke={INK} strokeWidth="2" />
-            <rect x={x - 14} y={y - 10} width="28" height="20" rx="4" fill={C.sun} stroke={INK} strokeWidth="2" />
-            <text x={x} y={y + 3} fontSize="6.5" fontWeight="700" fill={INK} textAnchor="middle">Node {i + 1}</text>
-          </g>
-        );
-      })}
-    </svg>
-  );
-}
-
-function DiagMeshTopology() {
-  const nodes = [[60, 22], [140, 22], [35, 78], [100, 92], [165, 78]];
-  return (
-    <svg viewBox="0 0 200 110" className="w-full h-24">
-      {nodes.map((n1, i) =>
-        nodes.slice(i + 1).map((n2, j) => (
-          <line key={`${i}-${j}`} x1={n1[0]} y1={n1[1]} x2={n2[0]} y2={n2[1]} stroke={INK} strokeWidth="1.5" opacity="0.6" />
-        ))
-      )}
-      {nodes.map(([x, y], i) => (
-        <g key={i}>
-          <circle cx={x} cy={y} r="10" fill={C.coral} stroke={INK} strokeWidth="2" />
-          <text x={x} y={y + 3} fontSize="6.5" fontWeight="800" fill="#fff" textAnchor="middle">{i + 1}</text>
         </g>
       ))}
     </svg>
@@ -421,34 +349,9 @@ function DiagERDiagram() {
       <ellipse cx="40" cy="30" rx="22" ry="12" fill={C.sun} stroke={INK} strokeWidth="2" />
       <text x="40" y="32" fontSize="6" fontWeight="800" fill={INK} textAnchor="middle" textDecoration="underline">Roll_no</text>
       <line x1="58" y1="36" x2="82" y2="48" stroke={INK} strokeWidth="1.8" />
-      <ellipse cx="100" cy="18" rx="18" ry="10" fill={C.sun} stroke={INK} strokeWidth="2" />
-      <text x="100" y="21" fontSize="6" fontWeight="700" fill={INK} textAnchor="middle">Name</text>
-      <line x1="100" y1="28" x2="100" y2="45" stroke={INK} strokeWidth="1.8" />
-      <ellipse cx="160" cy="30" rx="18" ry="10" fill={C.sun} stroke={INK} strokeWidth="2" />
-      <text x="160" y="32" fontSize="6" fontWeight="700" fill={INK} textAnchor="middle">Age</text>
-      <line x1="144" y1="36" x2="118" y2="48" stroke={INK} strokeWidth="1.8" />
     </svg>
   );
 }
-
-function DiagNormalizationNested() {
-  return (
-    <svg viewBox="0 0 200 110" className="w-full h-24">
-      <ellipse cx="100" cy="55" rx="88" ry="44" fill={C.sun} stroke={INK} strokeWidth="2.5" />
-      <text x="100" y="20" fontSize="7" fontWeight="800" fill={INK} textAnchor="middle">1NF (Atomic)</text>
-      <ellipse cx="100" cy="58" rx="66" ry="32" fill={C.sky} stroke={INK} strokeWidth="2.5" />
-      <text x="100" y="36" fontSize="7" fontWeight="800" fill="#fff" textAnchor="middle">2NF (No Partial Dep)</text>
-      <ellipse cx="100" cy="62" rx="46" ry="20" fill={C.mint} stroke={INK} strokeWidth="2.5" />
-      <text x="100" y="52" fontSize="6.5" fontWeight="800" fill={INK} textAnchor="middle">3NF (No Transitive)</text>
-      <ellipse cx="100" cy="66" rx="24" ry="10" fill={C.grape} stroke={INK} strokeWidth="2" />
-      <text x="100" y="69" fontSize="6" fontWeight="800" fill="#fff" textAnchor="middle">BCNF</text>
-    </svg>
-  );
-}
-
-/* ======================================================================
-   NEW OBJECT ORIENTED PROGRAMMING (OOP) VISUAL DIAGRAMS (FROM PDF NOTES)
-   ====================================================================== */
 
 function DiagClassObject() {
   const uid = useId();
@@ -459,192 +362,176 @@ function DiagClassObject() {
           <path d="M0,0L7,3.5L0,7Z" fill={INK} />
         </marker>
       </defs>
-      {/* Class Blueprint */}
       <rect x="8" y="15" width="70" height="80" rx="8" fill={C.sun} stroke={INK} strokeWidth="2.5" strokeDasharray="4 2" />
       <text x="43" y="30" fontSize="7.5" fontWeight="800" fill={INK} textAnchor="middle">Class Blueprint</text>
-      <text x="43" y="48" fontSize="6" fill={INK} textAnchor="middle">properties (id)</text>
-      <text x="43" y="62" fontSize="6" fill={INK} textAnchor="middle">functions (add)</text>
-      <text x="43" y="78" fontSize="5.5" fontWeight="700" fill={INK} textAnchor="middle">(0 memory)</text>
-
-      {/* Instantiation Arrow */}
       <line x1="82" y1="55" x2="114" y2="55" stroke={INK} strokeWidth="2.5" markerEnd={`url(#${uid}-co)`} />
-      <text x="98" y="48" fontSize="6" fontWeight="800" fill={C.coral} textAnchor="middle">new()</text>
-
-      {/* Stack & Heap Object */}
       <rect x="118" y="15" width="74" height="80" rx="8" fill={C.grape} stroke={INK} strokeWidth="2.5" />
       <text x="155" y="30" fontSize="7.5" fontWeight="800" fill="#fff" textAnchor="middle">Object Instance</text>
-      <rect x="124" y="38" width="62" height="22" rx="4" fill={C.sky} stroke={INK} strokeWidth="1.5" />
-      <text x="155" y="52" fontSize="6" fontWeight="700" fill="#fff" textAnchor="middle">Stack: &amp;address</text>
-      <rect x="124" y="65" width="62" height="22" rx="4" fill={C.leaf} stroke={INK} strokeWidth="1.5" />
-      <text x="155" y="79" fontSize="6" fontWeight="700" fill={INK} textAnchor="middle">Heap Memory</text>
     </svg>
   );
 }
 
-function DiagInheritance5() {
+/* ======================================================================
+   NEW OPERATING SYSTEMS (OS) VISUAL DIAGRAMS (FROM PDF NOTES)
+   ====================================================================== */
+
+function DiagOSTypes() {
+  const types = ["Batch", "MultiProg", "MultiTask", "TimeShare", "RTOS"];
   return (
     <svg viewBox="0 0 200 110" className="w-full h-24">
-      {/* 5 Types of Inheritance overview */}
-      {[
-        { t: "Single", desc: "A → B", x: 20, col: C.sky },
-        { t: "Multiple", desc: "A,B → C", x: 58, col: C.mint },
-        { t: "Hierarchical", desc: "A → B,C", x: 100, col: C.sun },
-        { t: "Multilevel", desc: "A → B → C", x: 142, col: C.coral },
-        { t: "Hybrid", desc: "Combo", x: 180, col: C.pink }
-      ].map((item, i) => (
+      {types.map((t, i) => (
         <g key={i}>
-          <rect x={item.x - 16} y="20" width="32" height="70" rx="6" fill={item.col} stroke={INK} strokeWidth="2" />
-          <text x={item.x} y="40" fontSize="6" fontWeight="800" fill={INK} textAnchor="middle">{item.t}</text>
-          <text x={item.x} y="62" fontSize="5" fontWeight="700" fill={INK} textAnchor="middle">{item.desc}</text>
+          <rect x={6 + i * 38} y="25" width="34" height="60" rx="6" fill={i % 2 === 0 ? C.mint : C.sky} stroke={INK} strokeWidth="2" />
+          <text x={23 + i * 38} y="58" fontSize="6" fontWeight="800" fill={INK} textAnchor="middle">{t}</text>
         </g>
       ))}
     </svg>
   );
 }
 
-function DiagAccessSpecifiers() {
+function DiagProcessLifecycle() {
+  const uid = useId();
   return (
     <svg viewBox="0 0 200 110" className="w-full h-24">
-      {/* Vault Boxes */}
-      <rect x="8" y="15" width="56" height="80" rx="6" fill={C.coral} stroke={INK} strokeWidth="2.5" />
-      <text x="36" y="35" fontSize="7" fontWeight="800" fill="#fff" textAnchor="middle">Private</text>
-      <text x="36" y="55" fontSize="5.5" fill="#fff" textAnchor="middle">Same Class</text>
-      <text x="36" y="70" fontSize="5.5" fill="#fff" textAnchor="middle">Only 🔒</text>
+      <defs>
+        <marker id={`${uid}-p`} markerWidth="6" markerHeight="6" refX="4" refY="3" orient="auto">
+          <path d="M0,0L6,3L0,6Z" fill={INK} />
+        </marker>
+      </defs>
+      <rect x="6" y="42" width="32" height="24" rx="5" fill={C.sun} stroke={INK} strokeWidth="2" />
+      <text x="22" y="56" fontSize="6" fontWeight="800" fill={INK} textAnchor="middle">New</text>
 
-      <rect x="72" y="15" width="56" height="80" rx="6" fill={C.sun} stroke={INK} strokeWidth="2.5" />
-      <text x="100" y="35" fontSize="7" fontWeight="800" fill={INK} textAnchor="middle">Protected</text>
-      <text x="100" y="55" fontSize="5.5" fill={INK} textAnchor="middle">Class +</text>
-      <text x="100" y="70" fontSize="5.5" fill={INK} textAnchor="middle">Derived Child</text>
+      <line x1="38" y1="54" x2="56" y2="54" stroke={INK} strokeWidth="2" markerEnd={`url(#${uid}-p)`} />
 
-      <rect x="136" y="15" width="56" height="80" rx="6" fill={C.leaf} stroke={INK} strokeWidth="2.5" />
-      <text x="164" y="35" fontSize="7" fontWeight="800" fill={INK} textAnchor="middle">Public</text>
-      <text x="164" y="55" fontSize="5.5" fill={INK} textAnchor="middle">Accessible</text>
-      <text x="164" y="70" fontSize="5.5" fill={INK} textAnchor="middle">Anywhere 🌐</text>
+      <rect x="58" y="42" width="36" height="24" rx="5" fill={C.sky} stroke={INK} strokeWidth="2" />
+      <text x="76" y="56" fontSize="6" fontWeight="800" fill="#fff" textAnchor="middle">Ready</text>
+
+      <line x1="94" y1="54" x2="112" y2="54" stroke={INK} strokeWidth="2" markerEnd={`url(#${uid}-p)`} />
+
+      <rect x="114" y="42" width="40" height="24" rx="5" fill={C.mint} stroke={INK} strokeWidth="2" />
+      <text x="134" y="56" fontSize="6" fontWeight="800" fill={INK} textAnchor="middle">Running</text>
+
+      <line x1="154" y1="54" x2="168" y2="54" stroke={INK} strokeWidth="2" markerEnd={`url(#${uid}-p)`} />
+
+      <rect x="170" y="42" width="26" height="24" rx="5" fill={C.leaf} stroke={INK} strokeWidth="2" />
+      <text x="183" y="56" fontSize="5.5" fontWeight="800" fill={INK} textAnchor="middle">Exit</text>
+
+      <path d="M134,66 C 134,95 76,95 76,66" fill="none" stroke={INK} strokeWidth="2" markerEnd={`url(#${uid}-p)`} />
+      <text x="105" y="92" fontSize="5.5" fontWeight="700" fill={C.coral} textAnchor="middle">Wait I/O</text>
     </svg>
   );
 }
 
-function DiagPolymorphismDual() {
+function DiagSchedulingMetrics() {
   return (
     <svg viewBox="0 0 200 110" className="w-full h-24">
-      {/* Compile Time vs Runtime */}
-      <rect x="8" y="15" width="88" height="80" rx="8" fill={C.sky} stroke={INK} strokeWidth="2.5" />
-      <text x="52" y="32" fontSize="7.5" fontWeight="800" fill="#fff" textAnchor="middle">Compile-Time (Static)</text>
-      <text x="52" y="50" fontSize="6" fill="#fff" textAnchor="middle">Method Overloading</text>
-      <text x="52" y="65" fontSize="5.5" fill="#fff" textAnchor="middle">add(int, int)</text>
-      <text x="52" y="78" fontSize="5.5" fill="#fff" textAnchor="middle">add(int, int, int)</text>
-
-      <rect x="104" y="15" width="88" height="80" rx="8" fill={C.grape} stroke={INK} strokeWidth="2.5" />
-      <text x="148" y="32" fontSize="7.5" fontWeight="800" fill="#fff" textAnchor="middle">Runtime (Dynamic)</text>
-      <text x="148" y="50" fontSize="6" fill="#fff" textAnchor="middle">Method Overriding</text>
-      <text x="148" y="65" fontSize="5.5" fill="#fff" textAnchor="middle">virtual void show()</text>
-      <text x="148" y="78" fontSize="5.5" fill="#fff" textAnchor="middle">Base* b = &amp;derived</text>
+      <rect x="10" y="20" width="180" height="25" rx="6" fill="#fff" stroke={INK} strokeWidth="2.5" />
+      <rect x="10" y="20" width="40" height="25" rx="6" fill={C.pink} stroke={INK} strokeWidth="2" />
+      <text x="30" y="36" fontSize="6.5" fontWeight="800" fill={INK} textAnchor="middle">Arrival</text>
+      <rect x="50" y="20" width="60" height="25" fill={C.sun} stroke={INK} strokeWidth="2" />
+      <text x="80" y="36" fontSize="6.5" fontWeight="800" fill={INK} textAnchor="middle">Wait (WT)</text>
+      <rect x="110" y="20" width="80" height="25" rx="6" fill={C.mint} stroke={INK} strokeWidth="2" />
+      <text x="150" y="36" fontSize="6.5" fontWeight="800" fill={INK} textAnchor="middle">Burst (BT)</text>
+      <line x1="50" y1="60" x2="190" y2="60" stroke={INK} strokeWidth="3" />
+      <text x="120" y="78" fontSize="7" fontWeight="800" fill={C.coral} textAnchor="middle">Turnaround Time (TAT = CT - AT)</text>
     </svg>
   );
 }
 
-function DiagConstructors() {
+function DiagForkTree() {
+  return (
+    <svg viewBox="0 0 200 110" className="w-full h-24">
+      <circle cx="100" cy="22" r="10" fill={C.coral} stroke={INK} strokeWidth="2" />
+      <text x="100" y="25" fontSize="6.5" fontWeight="800" fill="#fff" textAnchor="middle">P0</text>
+      <line x1="100" y1="32" x2="60" y2="60" stroke={INK} strokeWidth="2" />
+      <line x1="100" y1="32" x2="140" y2="60" stroke={INK} strokeWidth="2" />
+      <circle cx="60" cy="60" r="9" fill={C.sky} stroke={INK} strokeWidth="2" />
+      <text x="60" y="63" fontSize="6" fontWeight="800" fill="#fff" textAnchor="middle">P1</text>
+      <circle cx="140" cy="60" r="9" fill={C.sky} stroke={INK} strokeWidth="2" />
+      <text x="140" y="63" fontSize="6" fontWeight="800" fill="#fff" textAnchor="middle">P2</text>
+      <text x="100" y="94" fontSize="7.5" fontWeight="800" fill={INK} textAnchor="middle">fork() n calls &rarr; 2^n - 1 children</text>
+    </svg>
+  );
+}
+
+function DiagCriticalSectionThree() {
   return (
     <svg viewBox="0 0 200 110" className="w-full h-24">
       {[
-        { name: "Default", code: "A()", col: C.sun },
-        { name: "Parameterized", code: "A(int x)", col: C.mint },
-        { name: "Copy", code: "A(const A&)", col: C.coral }
+        { name: "Mutual Exclusion", desc: "1 process in CS", col: C.coral },
+        { name: "Progress", desc: "No deadlock wait", col: C.sun },
+        { name: "Bounded Wait", desc: "No starvation", col: C.leaf }
       ].map((item, i) => (
         <g key={i}>
-          <rect x={10 + i * 62} y="20" width="56" height="70" rx="8" fill={item.col} stroke={INK} strokeWidth="2.5" />
-          <text x={38 + i * 62} y="42" fontSize="7" fontWeight="800" fill={INK} textAnchor="middle">{item.name}</text>
-          <text x={38 + i * 62} y="62" fontSize="5.5" fontWeight="700" fill={INK} textAnchor="middle">{item.code}</text>
+          <rect x={12 + i * 62} y="15" width="54" height="80" rx="8" fill={item.col} stroke={INK} strokeWidth="2.5" />
+          <text x={39 + i * 62} y="38" fontSize="6.5" fontWeight="800" fill={INK} textAnchor="middle">{item.name}</text>
+          <text x={39 + i * 62} y="62" fontSize="5.5" fontWeight="700" fill={INK} textAnchor="middle">{item.desc}</text>
         </g>
       ))}
     </svg>
   );
 }
 
-function DiagDestructorTilde() {
+function DiagDeadlock4Conditions() {
   return (
     <svg viewBox="0 0 200 110" className="w-full h-24">
-      <rect x="20" y="20" width="160" height="70" rx="10" fill={C.pink} stroke={INK} strokeWidth="3" />
-      <text x="100" y="48" fontSize="18" fontWeight="900" fill={INK} textAnchor="middle">~A() Destructor</text>
-      <text x="100" y="68" fontSize="7.5" fontWeight="700" fill={INK} textAnchor="middle">Invoked automatically &bull; Releases Heap Memory</text>
+      <circle cx="100" cy="55" r="42" fill="none" stroke={C.coral} strokeWidth="3" strokeDasharray="4 2" />
+      <text x="100" y="58" fontSize="7" fontWeight="900" fill={C.coral} textAnchor="middle">DEADLOCK</text>
+      {[
+        { name: "MutEx", x: 60, y: 25 },
+        { name: "Hold&Wait", x: 140, y: 25 },
+        { name: "NoPreempt", x: 60, y: 85 },
+        { name: "CircularWait", x: 140, y: 85 }
+      ].map((item, i) => (
+        <g key={i}>
+          <rect x={item.x - 22} y={item.y - 10} width="44" height="20" rx="4" fill={C.sun} stroke={INK} strokeWidth="1.8" />
+          <text x={item.x} y={item.y + 3} fontSize="5.5" fontWeight="800" fill={INK} textAnchor="middle">{item.name}</text>
+        </g>
+      ))}
     </svg>
   );
 }
 
-function DiagThisPointerSelf() {
-  const uid = useId();
+function DiagMemoryFitSchemes() {
   return (
     <svg viewBox="0 0 200 110" className="w-full h-24">
-      <defs>
-        <marker id={`${uid}-tp`} markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
-          <path d="M0,0L7,3.5L0,7Z" fill={INK} />
-        </marker>
-      </defs>
-      <rect x="40" y="25" width="120" height="60" rx="10" fill={C.sun} stroke={INK} strokeWidth="3" />
-      <text x="100" y="48" fontSize="9" fontWeight="800" fill={INK} textAnchor="middle">Object Instance</text>
-      <text x="100" y="65" fontSize="7.5" fontWeight="700" fill={INK} textAnchor="middle">this-&gt;data = x;</text>
-      <path d="M 150 40 C 185 20 185 90 150 75" fill="none" stroke={INK} strokeWidth="3" markerEnd={`url(#${uid}-tp)`} />
-      <text x="175" y="55" fontSize="7" fontWeight="800" fill={C.coral} textAnchor="middle">this</text>
+      <rect x="8" y="20" width="56" height="70" rx="6" fill={C.sky} stroke={INK} strokeWidth="2" />
+      <text x="36" y="38" fontSize="6.5" fontWeight="800" fill="#fff" textAnchor="middle">First Fit</text>
+      <text x="36" y="58" fontSize="5.5" fill="#fff" textAnchor="middle">1st hole that fits</text>
+
+      <rect x="72" y="20" width="56" height="70" rx="6" fill={C.mint} stroke={INK} strokeWidth="2" />
+      <text x="100" y="38" fontSize="6.5" fontWeight="800" fill={INK} textAnchor="middle">Best Fit</text>
+      <text x="100" y="58" fontSize="5.5" fill={INK} textAnchor="middle">Min leftover gap</text>
+
+      <rect x="136" y="20" width="56" height="70" rx="6" fill={C.coral} stroke={INK} strokeWidth="2" />
+      <text x="164" y="38" fontSize="6.5" fontWeight="800" fill="#fff" textAnchor="middle">Worst Fit</text>
+      <text x="164" y="58" fontSize="5.5" fill="#fff" textAnchor="middle">Max leftover gap</text>
     </svg>
   );
 }
 
-function DiagFriendFunctionKey() {
-  const uid = useId();
+function DiagDiskArmPlatter() {
   return (
     <svg viewBox="0 0 200 110" className="w-full h-24">
-      <defs>
-        <marker id={`${uid}-ff`} markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
-          <path d="M0,0L7,3.5L0,7Z" fill={INK} />
-        </marker>
-      </defs>
-      <rect x="15" y="20" width="80" height="70" rx="8" fill={C.grape} stroke={INK} strokeWidth="2.5" />
-      <text x="55" y="42" fontSize="7.5" fontWeight="800" fill="#fff" textAnchor="middle">Class A</text>
-      <rect x="25" y="52" width="60" height="24" rx="4" fill={C.coral} stroke={INK} strokeWidth="1.5" />
-      <text x="55" y="67" fontSize="6" fontWeight="700" fill="#fff" textAnchor="middle">private: int a, b;</text>
+      <circle cx="70" cy="55" r="38" fill={C.sun} stroke={INK} strokeWidth="3" />
+      <circle cx="70" cy="55" r="24" fill="none" stroke={INK} strokeWidth="1.5" strokeDasharray="3 3" />
+      <circle cx="70" cy="55" r="10" fill={INK} />
 
-      <line x1="150" y1="55" x2="98" y2="55" stroke={INK} strokeWidth="2.5" markerEnd={`url(#${uid}-ff)`} />
-
-      <rect x="120" y="30" width="68" height="50" rx="8" fill={C.leaf} stroke={INK} strokeWidth="2.5" />
-      <text x="154" y="52" fontSize="7" fontWeight="800" fill={INK} textAnchor="middle">friend int mul()</text>
-      <text x="154" y="68" fontSize="5.5" fill={INK} textAnchor="middle">Non-member Friend 🔑</text>
+      <line x1="70" y1="55" x2="160" y2="25" stroke={C.coral} strokeWidth="4" strokeLinecap="round" />
+      <rect x="155" y="18" width="25" height="15" rx="3" fill={C.sky} stroke={INK} strokeWidth="2" />
+      <text x="167" y="28" fontSize="5.5" fontWeight="800" fill="#fff" textAnchor="middle">Head</text>
+      <text x="130" y="90" fontSize="6.5" fontWeight="800" fill={INK} textAnchor="middle">Seek + Latency + Transfer</text>
     </svg>
   );
 }
 
-function DiagVTable() {
+function DiagThrashingSpike() {
   return (
     <svg viewBox="0 0 200 110" className="w-full h-24">
-      <rect x="10" y="20" width="70" height="70" rx="6" fill={C.sky} stroke={INK} strokeWidth="2.5" />
-      <text x="45" y="40" fontSize="7.5" fontWeight="800" fill="#fff" textAnchor="middle">Base* bptr</text>
-      <text x="45" y="60" fontSize="6" fill="#fff" textAnchor="middle">&amp;derived obj</text>
-
-      <rect x="90" y="15" width="45" height="80" rx="5" fill={C.sun} stroke={INK} strokeWidth="2" />
-      <text x="112" y="30" fontSize="6.5" fontWeight="800" fill={INK} textAnchor="middle">V-TABLE</text>
-      <line x1="90" y1="36" x2="135" y2="36" stroke={INK} strokeWidth="1.5" />
-      <text x="112" y="55" fontSize="5.5" fill={INK} textAnchor="middle">show() ptr</text>
-
-      <rect x="145" y="20" width="48" height="70" rx="6" fill={C.leaf} stroke={INK} strokeWidth="2.5" />
-      <text x="169" y="45" fontSize="6.5" fontWeight="800" fill={INK} textAnchor="middle">Derived::</text>
-      <text x="169" y="60" fontSize="6.5" fontWeight="800" fill={INK} textAnchor="middle">show()</text>
-    </svg>
-  );
-}
-
-function DiagPureVirtualAbstract() {
-  return (
-    <svg viewBox="0 0 200 110" className="w-full h-24">
-      <rect x="15" y="15" width="80" height="80" rx="8" fill={C.coral} stroke={INK} strokeWidth="2.5" strokeDasharray="4 2" />
-      <text x="55" y="35" fontSize="7.5" fontWeight="800" fill="#fff" textAnchor="middle">Abstract Class</text>
-      <text x="55" y="55" fontSize="6" fontWeight="700" fill="#fff" textAnchor="middle">virtual draw() = 0;</text>
-      <text x="55" y="75" fontSize="5.5" fill="#fff" textAnchor="middle">(Cannot instantiate)</text>
-
-      <line x1="98" y1="55" x2="118" y2="55" stroke={INK} strokeWidth="2.5" />
-
-      <rect x="120" y="15" width="68" height="80" rx="8" fill={C.mint} stroke={INK} strokeWidth="2.5" />
-      <text x="154" y="38" fontSize="7" fontWeight="800" fill={INK} textAnchor="middle">Derived Class</text>
-      <text x="154" y="58" fontSize="6" fontWeight="700" fill={INK} textAnchor="middle">draw() &#123;...&#125;</text>
-      <text x="154" y="78" fontSize="5.5" fill={INK} textAnchor="middle">Must Override</text>
+      <line x1="15" y1="90" x2="185" y2="90" stroke={INK} strokeWidth="3" />
+      <path d="M20,80 Q60,20 90,30 Q120,85 180,88" fill="none" stroke={C.coral} strokeWidth="4" />
+      <text x="90" y="20" fontSize="7.5" fontWeight="900" fill={C.coral} textAnchor="middle">Thrashing Spike!</text>
+      <text x="100" y="104" fontSize="6.5" fontWeight="700" fill={INK} textAnchor="middle">CPU spends 99% time swapping pages</text>
     </svg>
   );
 }
@@ -658,13 +545,13 @@ const nid = () => ++_id;
 
 const CONCEPTS = [
   // ---------- Fundamentals ----------
-  { id: nid(), cat: "Fundamentals", term: "Big-O notation", def: "Describes how runtime or memory grows as input size grows, focused on worst-case performance.", example: "O(1) < O(log n) < O(n) < O(n log n) < O(n²)", Diagram: DiagBars, dp: { heights: [8, 18, 32, 50, 78], color: C.coral }, link: "https://en.wikipedia.org/wiki/Big_O_notation" },
+  { id: nid(), cat: "Fundamentals", term: "Big-O notation", def: "Describes how runtime or memory grows as input size grows, focused on worst-case performance.", example: "O(1) < O(log n) < O(n) < O(n log n) < O(n²)", Diagram: DiagTable, dp: { color: C.coral }, link: "https://en.wikipedia.org/wiki/Big_O_notation" },
 
   // ---------- Git (FULLY PRESERVED) ----------
   { id: nid(), cat: "Git", term: "Working dir → staging → repo", def: "Edits live in working directory, `git add` stages snapshot, `git commit` locks snapshot into repo history.", example: "git status\ngit add index.js\ngit commit -m \"add login form\"", Diagram: DiagGitFlow, dp: {}, link: "https://git-scm.com/book/en/v2/Git-Basics-Recording-Changes-to-the-Repository" },
   { id: nid(), cat: "Git", term: "git init & git clone", def: "git init turns folder into new Git repo. git clone copies an entire existing remote repository onto your machine.", example: "git init\ngit clone https://github.com/user/repo.git", Diagram: DiagFlow, dp: { steps: ["init", "or clone", "repo"], colors: [C.sun, C.sky, C.leaf] }, link: "https://git-scm.com/docs/git-clone" },
   { id: nid(), cat: "Git", term: "Configuring your identity", def: "Git requires user.name and user.email to author commits.", example: "git config --global user.name \"Alice Dev\"\ngit config --global user.email \"alice@mail.com\"", Diagram: DiagFunctionBox, dp: { inLabel: "name/email", outLabel: "commits", label: "config" }, link: "https://git-scm.com/docs/git-config" },
-  { id: nid(), cat: "Git", term: "Staging & diffing", def: "git diff shows unstaged changes; git diff --staged shows staged changes about to be committed.", example: "git diff\ngit add file.js\ngit diff --staged", Diagram: DiagMagnify, dp: { color: C.sun }, link: "https://git-scm.com/docs/git-diff" },
+  { id: nid(), cat: "Git", term: "Staging & diffing", def: "git diff shows unstaged changes; git diff --staged shows staged changes about to be committed.", example: "git diff\ngit add file.js\ngit diff --staged", Diagram: DiagFlow, dp: { steps: ["working", "diff", "staged"], colors: [C.pink, C.sun, C.leaf] }, link: "https://git-scm.com/docs/git-diff" },
   { id: nid(), cat: "Git", term: "Branching & Merging", def: "A branch is a movable commit pointer. git merge integrates commits from another branch into your current branch.", example: "git branch feature\ngit checkout main\ngit merge feature", Diagram: DiagBranchMerge, dp: {}, link: "https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging" },
   { id: nid(), cat: "Git", term: "Stashing & Rewriting", def: "git stash shelves uncommitted work. git rebase replays commits; git reset rewinds history.", example: "git stash\ngit stash pop\ngit rebase main\ngit reset --hard HEAD~1", Diagram: DiagRewind, dp: {}, link: "https://git-scm.com/docs/git-stash" },
   { id: nid(), cat: "Git", term: ".gitignore & patterns", def: "Files matching .gitignore patterns are ignored by Git and never committed.", example: "node_modules/\n.env\ndist/", Diagram: DiagIgnore, dp: {}, link: "https://git-scm.com/docs/gitignore" },
@@ -677,51 +564,38 @@ const CONCEPTS = [
   { id: nid(), cat: "Docker", term: "Volumes & Persistent Storage", def: "Containers are ephemeral. Volumes store data outside the container filesystem so database data persists.", example: "docker run -v pgdata:/var/lib/postgresql/data postgres", Diagram: DiagStack, dp: { layers: [{ label: "container (ephemeral)", color: C.pink }, { label: "volume (persists)", color: C.leaf }] } },
   { id: nid(), cat: "Docker", term: "Docker Compose & Networks", def: "Docker Compose defines multi-container applications in YAML (web + db + redis).", example: "docker compose up -d", Diagram: DiagContainers, dp: { withGuestOS: false, count: 3 } },
 
-  // ---------- OBJECT ORIENTED PROGRAMMING (EXPANDED COVER-TO-COVER FROM PDF) ----------
-  { id: nid(), cat: "OOP", term: "Class vs. Object & Memory Allocation", def: "Class is a logical user-defined blueprint (occupies 0 memory). Object is a runtime instance. `new` allocates memory in Heap and pointer in Stack.", example: "class student { int id; };\nstudent* s = new student(); // Heap memory", Diagram: DiagClassObject, dp: {}, link: "https://en.wikipedia.org/wiki/Object-oriented_programming" },
-  { id: nid(), cat: "OOP", term: "5 Types of Inheritance", def: "Acquires base class properties: 1. Single (A→B), 2. Multiple (A,B→C), 3. Hierarchical (A→B,C), 4. Multilevel (A→B→C), 5. Hybrid (Combo).", example: "class Derived : public Base1, public Base2 { }; // Multiple", Diagram: DiagInheritance5, dp: {}, link: "https://en.wikipedia.org/wiki/Inheritance_(object-oriented_programming)" },
-  { id: nid(), cat: "OOP", term: "Access Specifiers (Private, Protected, Public)", def: "Controls visibility: Private (same class only), Protected (same class & derived child classes), Public (accessible anywhere).", example: "private: int secret;\nprotected: int familyData;\npublic: int openData;", Diagram: DiagAccessSpecifiers, dp: {} },
-  { id: nid(), cat: "OOP", term: "Encapsulation & Data Hiding", def: "Bundles data & functions in a class. Keeps attributes private and provides public getter/setter methods to prevent direct illegal tampering.", example: "class Account { private: int balance; public: int getBalance() { return balance; } };", Diagram: DiagCapsule, dp: {}, link: "https://en.wikipedia.org/wiki/Encapsulation_(computer_programming)" },
-  { id: nid(), cat: "OOP", term: "Abstraction & Data Binding", def: "Exposes essential features while hiding internal complex machinery. Data binding binds application UI to underlying business logic.", example: "coffeeMachine.brew() — caller doesn't need to know heating coil logic.", Diagram: DiagAbstraction, dp: {}, link: "https://en.wikipedia.org/wiki/Abstraction_(computer_science)" },
-  { id: nid(), cat: "OOP", term: "Polymorphism: Compile-Time vs. Runtime", def: "Same interface, multiple forms. Compile-Time (Static) = Method Overloading. Runtime (Dynamic) = Method Overriding using virtual functions.", example: "Overloading: add(2,3) vs add(2,3,4)\nOverriding: virtual void show()", Diagram: DiagPolymorphismDual, dp: {}, link: "https://en.wikipedia.org/wiki/Polymorphism_(computer_science)" },
-  { id: nid(), cat: "OOP", term: "Method Overloading vs. Method Overriding", def: "Overloading = same function name, different parameters in same class (static binding). Overriding = same function signature in parent & child class (dynamic binding).", example: "Overloading: int add(a,b) & int add(a,b,c)\nOverriding: Derived::show() overrides Base::show()", Diagram: DiagCompare, dp: { left: "Overloading (Static)", right: "Overriding (Dynamic)", colorL: C.sky, colorR: C.coral } },
-  { id: nid(), cat: "OOP", term: "Constructors (Default, Parameterized, Copy)", def: "Special method invoked automatically at object creation. Default (no args), Parameterized (custom args), Copy (`A(const A &obj)`).", example: "go a1(20); // Parameterized\ngo a2(a1); // Copy constructor", Diagram: DiagConstructors, dp: {} },
-  { id: nid(), cat: "OOP", term: "Destructors (~tilde)", def: "Invoked automatically when object goes out of scope or is deleted to release memory resources. Same name as class prefixed with tilde `~`.", example: "class A { public: ~A() { cout << \"Destructor in use\"; } };", Diagram: DiagDestructorTilde, dp: {} },
-  { id: nid(), cat: "OOP", term: "`this` Pointer", def: "Implicit pointer keyword inside member functions pointing to the current object instance.", example: "struct Node { int data; Node(int x) { this->data = x; } };", Diagram: DiagThisPointerSelf, dp: {} },
-  { id: nid(), cat: "OOP", term: "Friend Function", def: "A non-member function granted special access permission to private and protected members of a class.", example: "class A { private: int a=2; friend int mul(A k) { return k.a * 10; } };", Diagram: DiagFriendFunctionKey, dp: {} },
-  { id: nid(), cat: "OOP", term: "Virtual Function & V-Table Dispatch", def: "Base class function declared with `virtual` keyword. Allows base class pointer pointing to derived object to call derived overridden function at runtime via Virtual Table.", example: "Base* bptr = &derivedObj; bptr->show(); // Prints Derived version", Diagram: DiagVTable, dp: {} },
-  { id: nid(), cat: "OOP", term: "Pure Virtual Function & Abstract Classes", def: "Pure virtual function is declared with `= 0` (`virtual void draw() = 0;`). A class with pure virtual functions is Abstract and cannot be instantiated.", example: "class Shape { public: virtual void draw()=0; }; // Abstract class", Diagram: DiagPureVirtualAbstract, dp: {} },
-  { id: nid(), cat: "OOP", term: "Namespaces in C++", def: "Logical code division designed to prevent identifier naming conflicts and ambiguity.", example: "namespace Add { int add() { return a + b; } }\nint res = Add::add();", Diagram: DiagFunctionBox, dp: { inLabel: "scope", outLabel: "symbol", label: "namespace" } },
-  { id: nid(), cat: "OOP", term: "Virtual Inheritance (Diamond Problem)", def: "Prevents duplicate multiple copies of a base class when derived classes inherit from a common ancestor in diamond inheritance.", example: "class B : virtual public A { }; class C : virtual public A { };", Diagram: DiagPoly, dp: {} },
+  // ---------- OPERATING SYSTEMS (EXPANDED COVER-TO-COVER FROM PDF) ----------
+  { id: nid(), cat: "OS", term: "Operating System & 5 Types", def: "Interface between user and hardware. 5 Types: Batch OS, Multiprogramming OS (CPU busy on I/O), Multitasking OS (quick context switch), Time-Sharing OS, Real-Time OS (RTOS strict deadlines).", example: "RTOS used in aviation/automotive; Multitasking in Windows/Linux.", Diagram: DiagOSTypes, dp: {}, link: "https://en.wikipedia.org/wiki/Operating_system" },
+  { id: nid(), cat: "OS", term: "Process & PCB (Process Control Block)", def: "Process is a program under execution. Program Counter (PC) holds next instruction address. PCB holds state, PC, registers, memory limits.", example: "PCB = Process ID + Program Counter + State + Registers", Diagram: DiagProcessLifecycle, dp: {}, link: "https://en.wikipedia.org/wiki/Process_control_block" },
+  { id: nid(), cat: "OS", term: "Process Scheduling Metrics", def: "Arrival Time (AT), Burst Time (BT), Completion Time (CT). Turnaround Time (TAT) = CT - AT. Waiting Time (WT) = TAT - BT.", example: "TAT = CT - AT | WT = TAT - BT", Diagram: DiagSchedulingMetrics, dp: {} },
+  { id: nid(), cat: "OS", term: "Thread vs. Process & `fork()` Call", def: "Thread is a lightweight unit of CPU execution sharing code/data memory. `fork()` system call with n calls creates 2^n - 1 child processes.", example: "fork(); fork(); // Creates 2^2 - 1 = 3 child processes", Diagram: DiagForkTree, dp: {}, link: "https://en.wikipedia.org/wiki/Fork_(system_call)" },
+  { id: nid(), cat: "OS", term: "CPU Scheduling Algorithms", def: "FCFS (First Come First Serve), SJF (Shortest Job First), SRTF (Preemptive SJF), Round Robin (time quantum), Priority, HRRN (Highest Response Ratio Next), MLFQ (Multilevel Feedback Queue).", example: "HRRN Response Ratio = (WT + BT) / BT (prevents starvation)", Diagram: DiagFlow, dp: { steps: ["FCFS", "SJF", "RR", "MLFQ"], colors: [C.sky, C.sun, C.mint, C.coral] } },
+  { id: nid(), cat: "OS", term: "Critical Section Problem & Conditions", def: "Code segment accessing shared variables. 3 necessary conditions for solution: 1. Mutual Exclusion, 2. Progress, 3. Bounded Waiting.", example: "Mutual Exclusion ensures only 1 process in Critical Section at a time.", Diagram: DiagCriticalSectionThree, dp: {} },
+  { id: nid(), cat: "OS", term: "Semaphores (Binary vs. Counting) & Mutex", def: "Synchronization tool lock. Binary Semaphore (0 or 1 value). Counting Semaphore (integer resource count). Mutex = mutual exclusion key lock.", example: "Mutex: producer/consumer lock | Semaphore: counting available slots.", Diagram: DiagCompare, dp: { left: "Binary (0/1)", right: "Counting (N)", colorL: C.sky, colorR: C.leaf } },
+  { id: nid(), cat: "OS", term: "Deadlocks & 4 Necessary Conditions", def: "System blocked where processes wait for resources held by each other. 4 conditions: Mutual Exclusion, Hold & Wait, No Preemption, Circular Wait.", example: "Circular Wait: P1 holds R1 waiting for R2 while P2 holds R2 waiting for R1.", Diagram: DiagDeadlock4Conditions, dp: {}, link: "https://en.wikipedia.org/wiki/Deadlock" },
+  { id: nid(), cat: "OS", term: "Deadlock Avoidance: Banker's Algorithm", def: "Deadlock avoidance technique named after banking system. Tests for safe allocation states before granting resources.", example: "Allocates resources only if system remains in a SAFE state.", Diagram: DiagTable, dp: { color: C.sun } },
+  { id: nid(), cat: "OS", term: "Memory Management: First Fit, Best Fit, Worst Fit", def: "Variable partitioning memory allocation: First Fit (first fitting hole), Best Fit (minimum leftover gap), Worst Fit (maximum leftover gap).", example: "Best fit minimizes leftover gap; Worst fit leaves max remaining space.", Diagram: DiagMemoryFitSchemes, dp: {} },
+  { id: nid(), cat: "OS", term: "Paging vs. Segmentation", def: "Paging divides physical memory into equal frames and main memory into pages (eliminates external fragmentation). Segmentation gives user logical view of memory segments.", example: "Paging = fixed-size frames | Segmentation = variable logical segments", Diagram: DiagCompare, dp: { left: "Paging (Fixed)", right: "Segment (Logical)", colorL: C.mint, colorR: C.grape } },
+  { id: nid(), cat: "OS", term: "Page Fault & Page Replacement (FIFO, LRU, Optimal)", def: "Page Fault occurs when virtual page is not in RAM. Page replacement: FIFO (subject to Belady's Anomaly), LRU (Least Recently Used), Optimal (future lookahead benchmark).", example: "Belady's Anomaly: FIFO page faults INCREASE when frames INCREASE!", Diagram: DiagFlow, dp: { steps: ["Page Fault", "FIFO", "LRU", "Optimal"], colors: [C.coral, C.sun, C.sky, C.leaf] } },
+  { id: nid(), cat: "OS", term: "Disk Scheduling (Seek Time, Latency, SCAN / SSTF)", def: "I/O scheduling: Seek Time (arm to track) + Rotational Latency + Transfer Time. Algorithms: FCFS, SSTF (Shortest Seek Time First), SCAN (Elevator), C-SCAN, LOOK, C-LOOK.", example: "SCAN = Elevator algorithm moving end-to-end.", Diagram: DiagDiskArmPlatter, dp: {} },
+  { id: nid(), cat: "OS", term: "Monolithic vs. Microkernel", def: "Monolithic Kernel includes all OS services in single executable. Microkernel runs minimal core kernel with services in user space.", example: "Linux = Monolithic Kernel | L4 / QNX = Microkernel", Diagram: DiagCompare, dp: { left: "Monolithic", right: "Microkernel", colorL: C.coral, colorR: C.sky } },
+  { id: nid(), cat: "OS", term: "Thrashing & Virtual Memory", def: "Thrashing occurs when OS spends more time swapping pages in/out of disk than executing instructions due to high page fault rate.", example: "CPU utilization drops to near zero as swapping spikes.", Diagram: DiagThrashingSpike, dp: {} },
+
+  // ---------- OBJECT ORIENTED PROGRAMMING ----------
+  { id: nid(), cat: "OOP", term: "Class vs. Object & Memory Allocation", def: "Class is logical user-defined blueprint (0 memory). Object is runtime instance. `new` allocates Heap memory & Stack address pointer.", example: "student* s = new student();", Diagram: DiagClassObject, dp: {} },
+  { id: nid(), cat: "OOP", term: "5 Types of Inheritance & Access Specifiers", def: "Single, Multiple, Hierarchical, Multilevel, Hybrid. Access: Private (same class 🔒), Protected (class + derived), Public (anywhere 🌐).", example: "class Derived : public Base1, public Base2 { };", Diagram: DiagFlow, dp: { steps: ["Single", "Multiple", "Hierarchical", "Hybrid"], colors: [C.sky, C.mint, C.sun, C.coral] } },
+  { id: nid(), cat: "OOP", term: "Polymorphism: Overloading vs. Overriding", def: "Overloading = same function name, different parameters in same class (static). Overriding = same function signature in parent & child class (dynamic V-table).", example: "Overloading: add(a,b) vs add(a,b,c)\nOverriding: virtual void show()", Diagram: DiagCompare, dp: { left: "Overloading", right: "Overriding", colorL: C.sky, colorR: C.coral } },
 
   // ---------- COMPUTER NETWORKS ----------
-  { id: nid(), cat: "Networking", term: "Network Topologies (Star, Ring, Bus, Mesh, Tree, Hybrid)", def: "Layout specification of nodes and cables. Star (central hub), Ring (token loop), Bus (shared backbone), Mesh (direct links), Tree, Hybrid.", example: "Star, Ring, Bus, Mesh, Tree, Hybrid topologies", Diagram: DiagStarTopology, dp: {} },
-  { id: nid(), cat: "Networking", term: "Network Types by Area (PAN, LAN, HAN, CAN, MAN, WAN, GAN)", def: "Geographic scale: PAN (10m Bluetooth), LAN (office), HAN (home), CAN (campus), MAN (city), WAN (global/internet), GAN (satellites).", example: "PAN = 10m range | LAN = Office building | WAN = Global Internet", Diagram: DiagNetworkScale, dp: {} },
-  { id: nid(), cat: "Networking", term: "VPN & Secured Tunneling", def: "Virtual Private Network encrypts traffic in a secure tunnel across public Internet.", example: "AES Encrypted tunnel connecting remote worker to corporate intranet.", Diagram: DiagVPNTunnel, dp: {} },
-  { id: nid(), cat: "Networking", term: "IPv4 Addressing & Classes (A, B, C, D, E)", def: "32-bit address. Class A (1-126 large), Class B (128-191 medium), Class C (192-223 LAN), Class D (224-239 Multicast), Class E (240-254 R&D).", example: "192.168.1.1 is Class C Local Network IP.", Diagram: DiagIPv4Classes, dp: {} },
+  { id: nid(), cat: "Networking", term: "Network Topologies (Star, Ring, Bus, Mesh, Tree, Hybrid)", def: "Layout of nodes and cables. Star (hub), Ring (token), Bus (backbone), Mesh (direct N*(N-1)/2 links), Tree, Hybrid.", example: "Star, Ring, Bus, Mesh, Tree, Hybrid topologies", Diagram: DiagStarTopology, dp: {} },
   { id: nid(), cat: "Networking", term: "OSI Model (7 Layers) vs TCP/IP (4 Layers)", def: "OSI: Physical, Data Link, Network, Transport, Session, Presentation, Application. TCP/IP: Link, Internet, Transport, Application.", example: "OSI = 7 Layer Standard | TCP/IP = 4 Layer Internet Protocol", Diagram: DiagOSIvsTCPIP, dp: {} },
-  { id: nid(), cat: "Networking", term: "HTTP vs. HTTPS", def: "HTTP (port 80) sends plain unencrypted text. HTTPS (port 443) uses SSL/TLS encryption.", example: "HTTP: port 80 (insecure) | HTTPS: port 443 (SSL/TLS encrypted)", Diagram: DiagHTTPvsHTTPS, dp: {} },
-  { id: nid(), cat: "Networking", term: "DNS Lookup & Forwarder", def: "Domain Name System maps domain names to IP addresses over UDP port 53.", example: "google.com → 142.250.x.x", Diagram: DiagDNSFlow, dp: {} },
-  { id: nid(), cat: "Networking", term: "TCP 3-Way Handshake & UDP", def: "TCP establishes connection via SYN → SYN-ACK → ACK. UDP is connectionless and fast.", example: "SYN → SYN-ACK → ACK", Diagram: DiagHandshake, dp: {} },
 
   // ---------- DBMS & SQL ----------
-  { id: nid(), cat: "SQL", term: "Database & DBMS Overview", def: "Database is an organized collection of related data. DBMS software manages storage, security, and retrieval.", example: "MySQL, PostgreSQL, Oracle, SQLite", Diagram: DiagTable, dp: { color: C.leaf } },
-  { id: nid(), cat: "SQL", term: "ER Diagram (Entity Relationship)", def: "Graphical representation of logical database structure consisting of Entity Sets, Attributes, and Relationships.", example: "Student (Entity) -- [Roll_no (PK), Name, Age] (Attributes)", Diagram: DiagERDiagram, dp: {} },
-  { id: nid(), cat: "SQL", term: "Key Hierarchy (Super, Candidate, Primary, Alternate, Foreign)", def: "Super Key ⊃ Candidate Key ⊃ Primary Key. Alternate Key = unused Candidate Keys.", example: "Super Key ⊃ Candidate Key ⊃ Primary Key", Diagram: DiagKeyHierarchy, dp: {} },
-  { id: nid(), cat: "SQL", term: "Normalization (1NF, 2NF, 3NF, BCNF)", def: "Reduces data redundancy. 1NF (Atomic), 2NF (No partial dep), 3NF (No transitive dep), BCNF (Super key LHS).", example: "1NF ⊃ 2NF ⊃ 3NF ⊃ BCNF", Diagram: DiagNormalizationNested, dp: {} },
-  { id: nid(), cat: "SQL", term: "Transaction Life Cycle & ACID", def: "Active → Partially Committed → Committed OR Failed → Aborted. ACID: Atomicity, Consistency, Isolation, Durability.", example: "Active -> Committed / Aborted", Diagram: DiagTransactionLifeCycle, dp: {} },
-  { id: nid(), cat: "SQL", term: "SQL Command Categories & Joins", def: "DDL (CREATE/ALTER), DML (SELECT/INSERT), DCL (GRANT), TCL (COMMIT). Joins: INNER, LEFT, RIGHT, FULL, CROSS.", example: "SELECT * FROM a INNER JOIN b ON a.id = b.id;", Diagram: DiagSQLCategories, dp: {} },
+  { id: nid(), cat: "SQL", term: "ER Diagram & Normalization (1NF → BCNF)", def: "ER entities, attributes, keys. Normalization removes redundancy: 1NF (Atomic), 2NF (No partial dep), 3NF (No transitive dep), BCNF.", example: "1NF ⊃ 2NF ⊃ 3NF ⊃ BCNF", Diagram: DiagERDiagram, dp: {} },
 
-  // ---------- OS ----------
-  { id: nid(), cat: "OS", term: "Process vs. thread", def: "Process = independent program with memory space. Thread = lightweight unit inside process sharing memory.", example: "Browser tabs = processes | Renderers = threads", Diagram: DiagCompare, dp: { left: "Process", right: "Thread", colorL: C.sky, colorR: C.grape } },
-
-  // ---------- Data Structures ----------
+  // ---------- Data Structures & Algorithms ----------
   { id: nid(), cat: "Data Structures", term: "Arrays vs. linked lists", def: "Arrays give O(1) index access but O(n) insert. Linked lists give O(1) insert once pointer is positioned.", example: "Random access → Array | Frequent inserts → Linked List", Diagram: DiagCompare, dp: { left: "Array", right: "Linked List", colorL: C.sky, colorR: C.coral } },
-
-  // ---------- Algorithms ----------
-  { id: nid(), cat: "Algorithms", term: "Two pointers", def: "Move two indices through array to solve problems in O(n) without nested loops.", example: "let l=0, r=n-1; while(l<r) { ... }", Diagram: DiagPointers, dp: {} },
-
-  // ---------- React ----------
+  { id: nid(), cat: "Algorithms", term: "Two pointers", def: "Move two indices through array to solve problems in O(n) without nested loops.", example: "let l=0, r=n-1; while(l<r) { ... }", Diagram: DiagTable, dp: { color: C.coral } },
   { id: nid(), cat: "React", term: "useState vs. useReducer", def: "useState is best for simple values. useReducer centralizes state transitions when logic is complex.", example: "const [state, dispatch] = useReducer(reducer, initial);", Diagram: DiagCompare, dp: { left: "useState", right: "useReducer", colorL: C.sky, colorR: C.grape } }
 ];
 
@@ -1039,34 +913,34 @@ function TabBar({ active, setActive }) {
    ====================================================================== */
 
 const STATS = [
-  { label: "Topics mastered", value: "78", total: "/ 160", icon: BookOpen, color: C.sun },
+  { label: "Topics mastered", value: "92", total: "/ 180", icon: BookOpen, color: C.sun },
   { label: "Problems solved", value: "95", total: "total", icon: Code2, color: C.mint },
-  { label: "Avg assessment score", value: "90", total: "%", icon: ClipboardCheck, color: C.sky },
+  { label: "Avg assessment score", value: "92", total: "%", icon: ClipboardCheck, color: C.sky },
   { label: "Current streak", value: "12", total: "days", icon: Flame, color: C.coral },
 ];
 
 const PROGRESS = [
+  { name: "Operating Systems (OS)", pct: 95, color: C.mint },
   { name: "Object Oriented Programming (OOP)", pct: 95, color: C.grape },
   { name: "DBMS & SQL: ER Diagrams & Normalization", pct: 95, color: C.leaf },
   { name: "Computer Networks: Topologies & OSI", pct: 90, color: C.amber },
   { name: "Git & Version Control", pct: 85, color: C.rust },
   { name: "Docker & DevOps Containers", pct: 80, color: C.docker },
   { name: "Arrays, Strings & Pointers", pct: 80, color: C.mint },
-  { name: "React: Hooks & State Management", pct: 70, color: C.cyan },
 ];
 
 const SCHEDULE = [
-  { title: "OOP — Inheritance Types & Virtual Tables", when: "Today", date: "Aug 10", color: C.grape },
-  { title: "DBMS & SQL — Normalization & ER Diagrams", when: "Tomorrow", date: "Aug 11", color: C.leaf },
-  { title: "Docker & Git — Containers & Rebasing", when: "in 2 days", date: "Aug 12", color: C.docker },
-  { title: "Assessment — Polymorphism & Networks", when: "in 4 days", date: "Aug 14", color: C.coral },
+  { title: "OS — CPU Scheduling, Deadlocks & Paging", when: "Today", date: "Aug 10", color: C.mint },
+  { title: "OOP — Inheritance Types & Virtual Tables", when: "Tomorrow", date: "Aug 11", color: C.grape },
+  { title: "DBMS & SQL — Normalization & ER Diagrams", when: "in 2 days", date: "Aug 12", color: C.leaf },
+  { title: "Assessment — OS & Network Protocols", when: "in 4 days", date: "Aug 14", color: C.coral },
 ];
 
 const RECOMMENDED = [
-  { title: "OOP: Class vs. Object (Stack/Heap Memory)", tag: "OOP", desc: "Visual guide to how `new` allocates object instance memory in Heap." },
-  { title: "5 Types of Inheritance (Single to Hybrid)", tag: "OOP", desc: "Master single, multiple, hierarchical, multilevel, and hybrid inheritance." },
-  { title: "Polymorphism: Overloading vs. Overriding", tag: "OOP", desc: "Static compile-time binding vs dynamic runtime V-table dispatch." },
-  { title: "ER Diagrams & Normalization (1NF → BCNF)", tag: "SQL", desc: "Master ER entities, keys, and functional dependency decomposition." },
+  { title: "OS: Process Control Block (PCB) & States", tag: "OS", desc: "Visual lifecycle from New → Ready → Running → Terminated." },
+  { title: "OS: Deadlocks & 4 Necessary Conditions", tag: "OS", desc: "Mutual Exclusion, Hold & Wait, No Preemption, and Circular Wait." },
+  { title: "OS: Belady's Anomaly in FIFO Page Faults", tag: "OS", desc: "Why increasing page frames can surprisingly INCREASE page faults in FIFO." },
+  { title: "OOP: 5 Types of Inheritance", tag: "OOP", desc: "Single, Multiple, Hierarchical, Multilevel, and Hybrid inheritance." },
   { title: "Docker Containers vs. Virtual Machines", tag: "Docker", desc: "Shared OS kernel containers vs heavy hypervisor Guest OS virtual machines." }
 ];
 
@@ -1078,7 +952,7 @@ function Dashboard({ goTo }) {
         <div>
           <h1 className="font-display text-2xl font-extrabold" style={{ color: INK }}>Welcome, Visual Learner!</h1>
           <p className="font-code text-[13px] mt-1" style={{ color: C.textMuted }}>
-            // OOP + DBMS & SQL + Computer Networks + Git + Docker visual curriculum fully loaded
+            // Operating Systems + OOP + DBMS & SQL + Computer Networks + Git + Docker active
           </p>
         </div>
       </div>
@@ -1266,7 +1140,7 @@ function ConceptLibrary() {
           <input
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search: Inheritance, Overloading, V-Table, ER Diagram, Git, Docker, OSI..."
+            placeholder="Search: PCB, Deadlocks, Belady, FIFO, Inheritance, Git, Docker, OSI..."
             className="bg-transparent outline-none flex-1 text-[13px] font-ui"
             style={{ color: INK }}
           />
@@ -1299,7 +1173,7 @@ function ConceptLibrary() {
 
       {filtered.length === 0 ? (
         <div className="rounded-3xl p-8 text-center sticker" style={{ backgroundColor: C.card, border: `3px solid ${INK}` }}>
-          <p className="text-[13px] font-ui" style={{ color: C.textMuted }}>No concepts match "{query}". Try searching for 'Inheritance', 'Virtual', or 'Git'.</p>
+          <p className="text-[13px] font-ui" style={{ color: C.textMuted }}>No concepts match "{query}". Try searching for 'Deadlocks', 'PCB', or 'Git'.</p>
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -1456,18 +1330,18 @@ function PracticeArena() {
 }
 
 /* ======================================================================
-   ASSESSMENT MODE (OOP, DBMS, SQL, NETWORKING, GIT, DOCKER)
+   ASSESSMENT MODE (OS, OOP, DBMS, SQL, NETWORKING, GIT, DOCKER)
    ====================================================================== */
 
 const QUESTIONS = [
-  { q: "What memory region is allocated when an object is created using the `new` keyword in C++?", options: ["Stack Memory", "Heap Memory", "Code Segment", "Register"], correct: 1, explain: "Using `new` allocates object variable space in Heap memory and stores the starting address pointer in Stack memory." },
+  { q: "What is Belady's Anomaly in Operating Systems memory management?", options: ["Increasing RAM causes CPU thrashing", "In FIFO page replacement, increasing page frames can surprisingly INCREASE page faults", "LRU page replacement causes infinite loops", "Deadlock occurs when page frames equal zero"], correct: 1, explain: "Belady's Anomaly demonstrates that increasing page frames in FIFO replacement can lead to more page faults for certain reference strings." },
+  { q: "Which of the following is NOT one of the 4 necessary Coffman conditions for a Deadlock?", options: ["Mutual Exclusion", "Hold and Wait", "Paging Segmentation", "Circular Wait"], correct: 2, explain: "The 4 Coffman conditions for Deadlock are Mutual Exclusion, Hold & Wait, No Preemption, and Circular Wait." },
+  { q: "What memory region is allocated when an object is created using the `new` keyword in C++?", options: ["Stack Memory", "Heap Memory", "Code Segment", "Register"], correct: 1, explain: "Using `new` allocates space in Heap memory and stores the address pointer in Stack memory." },
   { q: "Which type of inheritance occurs when a derived class inherits from two or more base classes simultaneously?", options: ["Single Inheritance", "Multilevel Inheritance", "Multiple Inheritance", "Hierarchical Inheritance"], correct: 2, explain: "Multiple inheritance is when a single child class derives attributes from two or more parent classes." },
-  { q: "What is an Abstract Class in Object-Oriented Programming?", options: ["A class with no variables", "A class containing at least one Pure Virtual Function (= 0) that cannot be instantiated directly", "A class with only private constructors", "A template struct"], correct: 1, explain: "An abstract class contains at least one pure virtual function (`virtual void f() = 0;`) and serves as a blueprint for derived classes." },
   { q: "In an ER diagram, what symbol is used to represent an Entity Set?", options: ["Oval", "Rectangle", "Diamond", "Dashed Circle"], correct: 1, explain: "Rectangles represent Entity Sets, Ovals represent Attributes, and Diamonds represent Relationship Sets." },
   { q: "Which Normal Form removes transitive functional dependencies (where non-key A → B)?", options: ["1NF", "2NF", "3NF", "BCNF"], correct: 2, explain: "3NF requires no transitive dependencies on non-prime attributes." },
   { q: "In Star topology, what happens if the central device (Hub/Switch) fails?", options: ["Only 1 node disconnects", "The entire network fails", "Nodes auto-switch to Ring mode", "No effect"], correct: 1, explain: "Star topology relies on the central hub/switch. Central failure downs the whole network." },
-  { q: "In Docker, what is the difference between an Image and a Container?", options: ["No difference", "Container is read-only blueprint, Image is live", "Image is immutable read-only blueprint, Container is live running instance", "Images require VM hypervisor"], correct: 2, explain: "An Image is a read-only blueprint; a Container is a live running instance." },
-  { q: "What does `git stash` do?", options: ["Deletes uncommitted changes permanently", "Shelves uncommitted changes so you can switch branches cleanly", "Creates a new branch", "Undoes the last commit"], correct: 1, explain: "git stash shelves uncommitted work to restore a clean working tree." }
+  { q: "In Docker, what is the difference between an Image and a Container?", options: ["No difference", "Container is read-only blueprint, Image is live", "Image is immutable read-only blueprint, Container is live running instance", "Images require VM hypervisor"], correct: 2, explain: "An Image is a read-only blueprint; a Container is a live running instance." }
 ];
 
 const QUIZ_SECONDS = 360;
@@ -1498,14 +1372,14 @@ function AssessmentMode() {
     return (
       <div className="p-5 md:p-8 max-w-2xl mx-auto">
         <h1 className="font-display text-xl font-extrabold mb-1" style={{ color: INK }}>Assessment mode</h1>
-        <p className="font-code text-[13px] mb-6" style={{ color: C.textMuted }}>// quiz.test.js — updated with OOP, DBMS, SQL, Computer Networks, Git & Docker</p>
+        <p className="font-code text-[13px] mb-6" style={{ color: C.textMuted }}>// quiz.test.js — updated with OS, OOP, DBMS, SQL, Computer Networks, Git & Docker</p>
         <div className="rounded-3xl p-6 sticker" style={{ backgroundColor: C.card, border: `3px solid ${INK}` }}>
           <div className="flex items-center gap-2 mb-3">
             <ShieldCheck size={18} style={{ color: C.sky }} />
             <p className="text-[15px] font-ui font-bold" style={{ color: INK }}>Timed knowledge check</p>
           </div>
           <ul className="text-[13px] leading-relaxed font-ui" style={{ color: C.textMuted }}>
-            <li>&bull; {QUESTIONS.length} multiple-choice questions covering OOP, DBMS, SQL, Computer Networks, Git & Docker</li>
+            <li>&bull; {QUESTIONS.length} multiple-choice questions covering OS, OOP, DBMS, SQL, Computer Networks, Git & Docker</li>
             <li>&bull; {Math.floor(QUIZ_SECONDS / 60)} minutes on the clock</li>
             <li>&bull; Instant scoring & detailed visual explanations after submission</li>
           </ul>
