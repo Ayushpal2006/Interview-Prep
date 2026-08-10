@@ -4,7 +4,12 @@ A comprehensive, visually-rich SDE1 & Full-Stack Interview Preparation web appli
 
 Designed specifically for **visual thinkers**, featuring interactive SVG diagrams, live network simulations, coding practice arena, and assessment quizzes.
 
-## 🚀 Features
+## 🚀 Live Deployments
+
+- ⚡ **Vercel Production**: [https://interview-prep-iota-six.vercel.app](https://interview-prep-iota-six.vercel.app)
+- 🌐 **GitHub Pages**: [https://ayushpal2006.github.io/Interview-Prep/](https://ayushpal2006.github.io/Interview-Prep/)
+
+## 🎨 Core Visual Features
 
 - 🌐 **Interactive Visual Network Lab**: Live topology switcher (Star, Ring, Bus, Mesh) with cable-cut simulation & packet flow tracking.
 - 🎨 **Visual Concept Library**: 30+ custom interactive SVG diagrams covering:
