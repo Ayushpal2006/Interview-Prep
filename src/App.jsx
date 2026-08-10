@@ -49,7 +49,11 @@ const CATEGORY_NAMES = Object.keys(CATEGORY_META);
 const NAV_ITEMS = [
   { id: "dashboard", label: "Dashboard", file: "today.md", icon: LayoutDashboard, color: C.sky },
   { id: "library", label: "Concept Library", file: "concepts.json", icon: BookOpen, color: C.sun },
-  { id: "networkLab", label: "Visual Network Lab", file: "network.visualizer.jsx", icon: Network, color: C.amber },
+  { id: "osLab", label: "OS Visual Node", file: "os.visualizer.jsx", icon: Cpu, color: C.mint },
+  { id: "dbmsLab", label: "DBMS/SQL Visual Node", file: "dbms.visualizer.jsx", icon: Database, color: C.leaf },
+  { id: "oopLab", label: "OOP Visual Node", file: "oop.visualizer.jsx", icon: Layers, color: C.grape },
+  { id: "networkLab", label: "Network Visual Node", file: "network.visualizer.jsx", icon: Network, color: C.amber },
+  { id: "devopsLab", label: "DevOps/Docker Node", file: "devops.visualizer.jsx", icon: Box, color: C.docker },
   { id: "practice", label: "Practice Arena", file: "practice.js", icon: Code2, color: C.mint },
   { id: "assessment", label: "Assessment Mode", file: "quiz.test.js", icon: ClipboardCheck, color: C.coral },
 ];
@@ -406,24 +410,15 @@ function DiagProcessLifecycle() {
       </defs>
       <rect x="6" y="42" width="32" height="24" rx="5" fill={C.sun} stroke={INK} strokeWidth="2" />
       <text x="22" y="56" fontSize="6" fontWeight="800" fill={INK} textAnchor="middle">New</text>
-
       <line x1="38" y1="54" x2="56" y2="54" stroke={INK} strokeWidth="2" markerEnd={`url(#${uid}-p)`} />
-
       <rect x="58" y="42" width="36" height="24" rx="5" fill={C.sky} stroke={INK} strokeWidth="2" />
       <text x="76" y="56" fontSize="6" fontWeight="800" fill="#fff" textAnchor="middle">Ready</text>
-
       <line x1="94" y1="54" x2="112" y2="54" stroke={INK} strokeWidth="2" markerEnd={`url(#${uid}-p)`} />
-
       <rect x="114" y="42" width="40" height="24" rx="5" fill={C.mint} stroke={INK} strokeWidth="2" />
       <text x="134" y="56" fontSize="6" fontWeight="800" fill={INK} textAnchor="middle">Running</text>
-
       <line x1="154" y1="54" x2="168" y2="54" stroke={INK} strokeWidth="2" markerEnd={`url(#${uid}-p)`} />
-
       <rect x="170" y="42" width="26" height="24" rx="5" fill={C.leaf} stroke={INK} strokeWidth="2" />
       <text x="183" y="56" fontSize="5.5" fontWeight="800" fill={INK} textAnchor="middle">Exit</text>
-
-      <path d="M134,66 C 134,95 76,95 76,66" fill="none" stroke={INK} strokeWidth="2" markerEnd={`url(#${uid}-p)`} />
-      <text x="105" y="92" fontSize="5.5" fontWeight="700" fill={C.coral} textAnchor="middle">Wait I/O</text>
     </svg>
   );
 }
@@ -503,15 +498,10 @@ function DiagMemoryFitSchemes() {
     <svg viewBox="0 0 200 110" className="w-full h-24">
       <rect x="8" y="20" width="56" height="70" rx="6" fill={C.sky} stroke={INK} strokeWidth="2" />
       <text x="36" y="38" fontSize="6.5" fontWeight="800" fill="#fff" textAnchor="middle">First Fit</text>
-      <text x="36" y="58" fontSize="5.5" fill="#fff" textAnchor="middle">1st hole that fits</text>
-
       <rect x="72" y="20" width="56" height="70" rx="6" fill={C.mint} stroke={INK} strokeWidth="2" />
       <text x="100" y="38" fontSize="6.5" fontWeight="800" fill={INK} textAnchor="middle">Best Fit</text>
-      <text x="100" y="58" fontSize="5.5" fill={INK} textAnchor="middle">Min leftover gap</text>
-
       <rect x="136" y="20" width="56" height="70" rx="6" fill={C.coral} stroke={INK} strokeWidth="2" />
       <text x="164" y="38" fontSize="6.5" fontWeight="800" fill="#fff" textAnchor="middle">Worst Fit</text>
-      <text x="164" y="58" fontSize="5.5" fill="#fff" textAnchor="middle">Max leftover gap</text>
     </svg>
   );
 }
@@ -522,11 +512,9 @@ function DiagDiskArmPlatter() {
       <circle cx="70" cy="55" r="38" fill={C.sun} stroke={INK} strokeWidth="3" />
       <circle cx="70" cy="55" r="24" fill="none" stroke={INK} strokeWidth="1.5" strokeDasharray="3 3" />
       <circle cx="70" cy="55" r="10" fill={INK} />
-
       <line x1="70" y1="55" x2="160" y2="25" stroke={C.coral} strokeWidth="4" strokeLinecap="round" />
       <rect x="155" y="18" width="25" height="15" rx="3" fill={C.sky} stroke={INK} strokeWidth="2" />
       <text x="167" y="28" fontSize="5.5" fontWeight="800" fill="#fff" textAnchor="middle">Head</text>
-      <text x="130" y="90" fontSize="6.5" fontWeight="800" fill={INK} textAnchor="middle">Seek + Latency + Transfer</text>
     </svg>
   );
 }
@@ -537,7 +525,6 @@ function DiagThrashingSpike() {
       <line x1="15" y1="90" x2="185" y2="90" stroke={INK} strokeWidth="3" />
       <path d="M20,80 Q60,20 90,30 Q120,85 180,88" fill="none" stroke={C.coral} strokeWidth="4" />
       <text x="90" y="20" fontSize="7.5" fontWeight="900" fill={C.coral} textAnchor="middle">Thrashing Spike!</text>
-      <text x="100" y="104" fontSize="6.5" fontWeight="700" fill={INK} textAnchor="middle">CPU spends 99% time swapping pages</text>
     </svg>
   );
 }
@@ -553,7 +540,7 @@ const CONCEPTS = [
   // ---------- Fundamentals ----------
   { id: nid(), cat: "Fundamentals", term: "Big-O notation", def: "Describes how runtime or memory grows as input size grows, focused on worst-case performance.", example: "O(1) < O(log n) < O(n) < O(n log n) < O(n²)", Diagram: DiagBars, dp: { heights: [8, 18, 32, 50, 78], color: C.coral }, link: "https://en.wikipedia.org/wiki/Big_O_notation" },
 
-  // ---------- Git (FULLY PRESERVED) ----------
+  // ---------- Git ----------
   { id: nid(), cat: "Git", term: "Working dir → staging → repo", def: "Edits live in working directory, `git add` stages snapshot, `git commit` locks snapshot into repo history.", example: "git status\ngit add index.js\ngit commit -m \"add login form\"", Diagram: DiagGitFlow, dp: {}, link: "https://git-scm.com/book/en/v2/Git-Basics-Recording-Changes-to-the-Repository" },
   { id: nid(), cat: "Git", term: "git init & git clone", def: "git init turns folder into new Git repo. git clone copies an entire existing remote repository onto your machine.", example: "git init\ngit clone https://github.com/user/repo.git", Diagram: DiagFlow, dp: { steps: ["init", "or clone", "repo"], colors: [C.sun, C.sky, C.leaf] }, link: "https://git-scm.com/docs/git-clone" },
   { id: nid(), cat: "Git", term: "Configuring your identity", def: "Git requires user.name and user.email to author commits.", example: "git config --global user.name \"Alice Dev\"\ngit config --global user.email \"alice@mail.com\"", Diagram: DiagFunctionBox, dp: { inLabel: "name/email", outLabel: "commits", label: "config" }, link: "https://git-scm.com/docs/git-config" },
@@ -562,7 +549,7 @@ const CONCEPTS = [
   { id: nid(), cat: "Git", term: "Stashing & Rewriting", def: "git stash shelves uncommitted work. git rebase replays commits; git reset rewinds history.", example: "git stash\ngit stash pop\ngit rebase main\ngit reset --hard HEAD~1", Diagram: DiagRewind, dp: {}, link: "https://git-scm.com/docs/git-stash" },
   { id: nid(), cat: "Git", term: ".gitignore & patterns", def: "Files matching .gitignore patterns are ignored by Git and never committed.", example: "node_modules/\n.env\ndist/", Diagram: DiagIgnore, dp: {}, link: "https://git-scm.com/docs/gitignore" },
 
-  // ---------- Docker (FULLY PRESERVED) ----------
+  // ---------- Docker ----------
   { id: nid(), cat: "Docker", term: "What is Docker?", def: "Packages an app with code, runtime, system tools, and libraries into a portable container.", example: "\"Works on my machine\" → Works in container everywhere.", Diagram: DiagContainers, dp: { withGuestOS: false, count: 3 }, link: "https://docs.docker.com/get-started/docker-overview/" },
   { id: nid(), cat: "Docker", term: "Containers vs. Virtual Machines", def: "Containers share host kernel (lightweight). VMs bundle a full guest OS (heavy hypervisor).", example: "3 containers share 1 kernel | 3 VMs run 3 guest OSs", Diagram: DiagVMvsContainer, dp: {} },
   { id: nid(), cat: "Docker", term: "Images vs. Containers", def: "Image is immutable read-only blueprint (class); Container is live running instance (object).", example: "docker run -d nginx", Diagram: DiagCompare, dp: { left: "Image", right: "Container", colorL: C.sun, colorR: C.docker } },
@@ -570,7 +557,7 @@ const CONCEPTS = [
   { id: nid(), cat: "Docker", term: "Volumes & Persistent Storage", def: "Containers are ephemeral. Volumes store data outside the container filesystem so database data persists.", example: "docker run -v pgdata:/var/lib/postgresql/data postgres", Diagram: DiagStack, dp: { layers: [{ label: "container (ephemeral)", color: C.pink }, { label: "volume (persists)", color: C.leaf }] } },
   { id: nid(), cat: "Docker", term: "Docker Compose & Networks", def: "Docker Compose defines multi-container applications in YAML (web + db + redis).", example: "docker compose up -d", Diagram: DiagContainers, dp: { withGuestOS: false, count: 3 } },
 
-  // ---------- OPERATING SYSTEMS (EXPANDED COVER-TO-COVER FROM PDF) ----------
+  // ---------- OPERATING SYSTEMS ----------
   { id: nid(), cat: "OS", term: "Operating System & 5 Types", def: "Interface between user and hardware. 5 Types: Batch OS, Multiprogramming OS (CPU busy on I/O), Multitasking OS (quick context switch), Time-Sharing OS, Real-Time OS (RTOS strict deadlines).", example: "RTOS used in aviation/automotive; Multitasking in Windows/Linux.", Diagram: DiagOSTypes, dp: {}, link: "https://en.wikipedia.org/wiki/Operating_system" },
   { id: nid(), cat: "OS", term: "Process & PCB (Process Control Block)", def: "Process is a program under execution. Program Counter (PC) holds next instruction address. PCB holds state, PC, registers, memory limits.", example: "PCB = Process ID + Program Counter + State + Registers", Diagram: DiagProcessLifecycle, dp: {}, link: "https://en.wikipedia.org/wiki/Process_control_block" },
   { id: nid(), cat: "OS", term: "Process Scheduling Metrics", def: "Arrival Time (AT), Burst Time (BT), Completion Time (CT). Turnaround Time (TAT) = CT - AT. Waiting Time (WT) = TAT - BT.", example: "TAT = CT - AT | WT = TAT - BT", Diagram: DiagSchedulingMetrics, dp: {} },
@@ -608,9 +595,169 @@ const CONCEPTS = [
 const CATEGORIES = ["All", ...CATEGORY_NAMES];
 
 /* ======================================================================
-   INTERACTIVE VISUAL NETWORK LAB
+   SUBJECT VISUALIZER LAB NODES (5 INTERACTIVE SUBJECT LABS)
    ====================================================================== */
 
+/* 1. OS VISUAL NODE */
+function OSVisualLab() {
+  const [algo, setAlgo] = useState("FCFS");
+  const [quantum, setQuantum] = useState(2);
+
+  const processes = [
+    { id: "P1", burst: 6, arrival: 0, color: C.sky },
+    { id: "P2", burst: 3, arrival: 1, color: C.mint },
+    { id: "P3", burst: 8, arrival: 2, color: C.sun },
+    { id: "P4", burst: 4, arrival: 4, color: C.coral }
+  ];
+
+  return (
+    <div className="p-5 md:p-8 max-w-6xl mx-auto">
+      <div className="flex items-center gap-3 mb-2">
+        <Cpu size={28} style={{ color: C.mint }} />
+        <h1 className="font-display text-2xl font-extrabold" style={{ color: INK }}>OS Visual Node — CPU Scheduler &amp; Memory Sandbox</h1>
+      </div>
+      <p className="font-code text-[13px] mb-6" style={{ color: C.textMuted }}>
+        // Interactive Operating System Gantt Chart Simulator &amp; Memory Management Lab
+      </p>
+
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
+        {["FCFS", "SJF", "Round Robin", "Priority"].map((a) => (
+          <button
+            key={a}
+            onClick={() => setAlgo(a)}
+            className="p-3 rounded-2xl text-left sticker-sm transition-all"
+            style={{
+              backgroundColor: algo === a ? C.mint : C.card,
+              border: `3px solid ${INK}`,
+              color: INK
+            }}
+          >
+            <p className="font-display text-base font-extrabold">{a}</p>
+            <p className="text-[11px] font-ui opacity-80">CPU Scheduling</p>
+          </button>
+        ))}
+      </div>
+
+      <div className="rounded-3xl p-6 mb-6 sticker" style={{ backgroundColor: C.card, border: `3.5px solid ${INK}` }}>
+        <div className="flex items-center justify-between mb-4">
+          <span className="font-display text-lg font-bold" style={{ color: INK }}>Live Gantt Chart Simulation: {algo}</span>
+          {algo === "Round Robin" && (
+            <div className="flex items-center gap-2">
+              <span className="text-xs font-bold font-ui">Time Quantum:</span>
+              <input type="number" value={quantum} onChange={(e) => setQuantum(Number(e.target.value))} className="w-14 px-2 py-1 border-2 border-black rounded-lg text-xs font-bold" />
+            </div>
+          )}
+        </div>
+
+        {/* Gantt Timeline */}
+        <div className="w-full bg-slate-900 rounded-2xl p-4 flex items-center gap-1 overflow-x-auto min-h-24">
+          {processes.map((p, i) => (
+            <div key={p.id} className="h-16 rounded-xl flex flex-col items-center justify-center font-bold text-white text-xs px-4" style={{ backgroundColor: p.color, width: `${p.burst * 18}px` }}>
+              <span>{p.id}</span>
+              <span className="text-[10px] opacity-80">{p.burst}ms</span>
+            </div>
+          ))}
+        </div>
+        <p className="text-xs font-code mt-3 text-gray-500">// Turnaround Time (TAT) = Completion Time - Arrival Time | Waiting Time (WT) = TAT - Burst Time</p>
+      </div>
+    </div>
+  );
+}
+
+/* 2. DBMS & SQL VISUAL NODE */
+function DBMSVisualLab() {
+  const [joinType, setJoinType] = useState("INNER");
+
+  return (
+    <div className="p-5 md:p-8 max-w-6xl mx-auto">
+      <div className="flex items-center gap-3 mb-2">
+        <Database size={28} style={{ color: C.leaf }} />
+        <h1 className="font-display text-2xl font-extrabold" style={{ color: INK }}>DBMS &amp; SQL Visual Node — ER Diagram &amp; JOIN Sandbox</h1>
+      </div>
+      <p className="font-code text-[13px] mb-6" style={{ color: C.textMuted }}>
+        // Interactive Relational Algebra, ER Models, Normalization &amp; SQL JOIN Venn Visualizer
+      </p>
+
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
+        {["INNER", "LEFT", "RIGHT", "FULL OUTER"].map((j) => (
+          <button
+            key={j}
+            onClick={() => setJoinType(j)}
+            className="p-3 rounded-2xl text-left sticker-sm transition-all"
+            style={{
+              backgroundColor: joinType === j ? C.leaf : C.card,
+              border: `3px solid ${INK}`,
+              color: INK
+            }}
+          >
+            <p className="font-display text-base font-extrabold">{j} JOIN</p>
+            <p className="text-[11px] font-ui opacity-80">Relational Algebra</p>
+          </button>
+        ))}
+      </div>
+
+      <div className="rounded-3xl p-6 mb-6 sticker" style={{ backgroundColor: C.card, border: `3.5px solid ${INK}` }}>
+        <p className="font-display text-lg font-bold mb-4" style={{ color: INK }}>Live Relational Venn Diagram: {joinType} JOIN</p>
+        <div className="w-full h-48 bg-slate-900 rounded-2xl flex items-center justify-center p-4">
+          <DiagCompare left={`Table A (${joinType})`} right="Table B" colorL={C.leaf} colorR={C.sky} />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* 3. OOP VISUAL NODE */
+function OOPVisualLab() {
+  const [hasNew, setHasNew] = useState(true);
+
+  return (
+    <div className="p-5 md:p-8 max-w-6xl mx-auto">
+      <div className="flex items-center gap-3 mb-2">
+        <Layers size={28} style={{ color: C.grape }} />
+        <h1 className="font-display text-2xl font-extrabold" style={{ color: INK }}>OOP Visual Node — Heap/Stack Memory &amp; V-Table Sandbox</h1>
+      </div>
+      <p className="font-code text-[13px] mb-6" style={{ color: C.textMuted }}>
+        // Interactive Memory Allocator &amp; 5 Types of Inheritance Explorer
+      </p>
+
+      <div className="rounded-3xl p-6 mb-6 sticker" style={{ backgroundColor: C.card, border: `3.5px solid ${INK}` }}>
+        <div className="flex items-center justify-between mb-4">
+          <span className="font-display text-lg font-bold" style={{ color: INK }}>Object Instantiation Memory Simulator</span>
+          <button onClick={() => setHasNew(!hasNew)} className="px-4 py-2 rounded-xl text-xs font-bold sticker-sm" style={{ backgroundColor: C.sun, border: `2px solid ${INK}` }}>
+            Toggle: {hasNew ? "student* s = new student()" : "student s"}
+          </button>
+        </div>
+        <div className="w-full h-48 bg-slate-900 rounded-2xl flex items-center justify-center p-4">
+          <DiagClassObject />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* 4. DEVOPS & DOCKER VISUAL NODE */
+function DevOpsVisualLab() {
+  return (
+    <div className="p-5 md:p-8 max-w-6xl mx-auto">
+      <div className="flex items-center gap-3 mb-2">
+        <Box size={28} style={{ color: C.docker }} />
+        <h1 className="font-display text-2xl font-extrabold" style={{ color: INK }}>DevOps &amp; Docker Visual Node — Container &amp; Git Graph</h1>
+      </div>
+      <p className="font-code text-[13px] mb-6" style={{ color: C.textMuted }}>
+        // Interactive Docker Container Stack vs. VM Hypervisor Simulator
+      </p>
+
+      <div className="rounded-3xl p-6 mb-6 sticker" style={{ backgroundColor: C.card, border: `3.5px solid ${INK}` }}>
+        <p className="font-display text-lg font-bold mb-4" style={{ color: INK }}>Container Layer Sandbox</p>
+        <div className="w-full h-48 bg-slate-900 rounded-2xl flex items-center justify-center p-4">
+          <DiagContainers count={4} color={C.docker} />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* 5. NETWORK VISUAL LAB NODE */
 function NetworkVisualLab() {
   const [selectedTop, setSelectedTop] = useState("Star");
   const [failedNode, setFailedNode] = useState(null);
@@ -626,10 +773,10 @@ function NetworkVisualLab() {
     <div className="p-5 md:p-8 max-w-6xl mx-auto">
       <div className="flex items-center gap-3 mb-2">
         <Network size={28} style={{ color: C.amber }} />
-        <h1 className="font-display text-2xl font-extrabold" style={{ color: INK }}>Interactive Visual Network Lab</h1>
+        <h1 className="font-display text-2xl font-extrabold" style={{ color: INK }}>Network Visual Node — Interactive Topology Sandbox</h1>
       </div>
       <p className="font-code text-[13px] mb-6" style={{ color: C.textMuted }}>
-        // Visual thinker interactive sandbox — toggle topology modes, simulate node failures & trace network impact
+        // Visual thinker interactive sandbox — toggle topology modes, simulate node failures &amp; trace network impact
       </p>
 
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
@@ -866,7 +1013,7 @@ function MobileNav({ active, setActive }) {
         <Mascot size={26} />
         <span className="font-display text-[14px] font-extrabold text-white">dev.prep</span>
       </div>
-      <div className="flex items-center gap-1">
+      <div className="flex items-center gap-1 overflow-x-auto">
         {NAV_ITEMS.map((item) => {
           const Icon = item.icon;
           const isActive = active === item.id;
@@ -875,7 +1022,7 @@ function MobileNav({ active, setActive }) {
               key={item.id}
               onClick={() => setActive(item.id)}
               aria-label={item.label}
-              className="p-2 rounded-xl"
+              className="p-2 rounded-xl shrink-0"
               style={{ backgroundColor: isActive ? item.color : "transparent" }}
             >
               <Icon size={16} style={{ color: isActive ? INK : "#C9C3F0" }} />
@@ -932,7 +1079,6 @@ const PROGRESS = [
   { name: "Computer Networks: Topologies & OSI", pct: 90, color: C.amber },
   { name: "Git & Version Control", pct: 85, color: C.rust },
   { name: "Docker & DevOps Containers", pct: 80, color: C.docker },
-  { name: "Arrays, Strings & Pointers", pct: 80, color: C.mint },
 ];
 
 const SCHEDULE = [
@@ -940,14 +1086,6 @@ const SCHEDULE = [
   { title: "OOP — Inheritance Types & Virtual Tables", when: "Tomorrow", date: "Aug 11", color: C.grape },
   { title: "DBMS & SQL — Normalization & ER Diagrams", when: "in 2 days", date: "Aug 12", color: C.leaf },
   { title: "Assessment — OS & Network Protocols", when: "in 4 days", date: "Aug 14", color: C.coral },
-];
-
-const RECOMMENDED = [
-  { title: "OS: Process Control Block (PCB) & States", tag: "OS", desc: "Visual lifecycle from New → Ready → Running → Terminated." },
-  { title: "OS: Deadlocks & 4 Necessary Conditions", tag: "OS", desc: "Mutual Exclusion, Hold & Wait, No Preemption, and Circular Wait." },
-  { title: "OS: Belady's Anomaly in FIFO Page Faults", tag: "OS", desc: "Why increasing page frames can surprisingly INCREASE page faults in FIFO." },
-  { title: "OOP: 5 Types of Inheritance", tag: "OOP", desc: "Single, Multiple, Hierarchical, Multilevel, and Hybrid inheritance." },
-  { title: "Docker Containers vs. Virtual Machines", tag: "Docker", desc: "Shared OS kernel containers vs heavy hypervisor Guest OS virtual machines." }
 ];
 
 function Dashboard({ goTo }) {
@@ -958,7 +1096,7 @@ function Dashboard({ goTo }) {
         <div>
           <h1 className="font-display text-2xl font-extrabold" style={{ color: INK }}>Welcome, Visual Learner!</h1>
           <p className="font-code text-[13px] mt-1" style={{ color: C.textMuted }}>
-            // Operating Systems + OOP + DBMS & SQL + Computer Networks + Git + Docker active
+            // 5 Dedicated Subject Visualizer Nodes (OS, DBMS, OOP, Networking, DevOps) fully active
           </p>
         </div>
       </div>
@@ -987,6 +1125,39 @@ function Dashboard({ goTo }) {
             </motion.div>
           );
         })}
+      </div>
+
+      {/* 5 SUBJECT VISUALIZER NODES PROMINENT CARDS */}
+      <div className="mb-8">
+        <SectionLabel icon={Sparkles}>Dedicated Subject Visualizer Nodes</SectionLabel>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
+          {[
+            { id: "osLab", title: "OS Node", desc: "CPU Scheduler & Deadlock Gantt chart", color: C.mint, icon: Cpu },
+            { id: "dbmsLab", title: "DBMS Node", desc: "ER Diagram & SQL JOIN Venn Visualizer", color: C.leaf, icon: Database },
+            { id: "oopLab", title: "OOP Node", desc: "Heap/Stack Memory & Inheritance Tree", color: C.grape, icon: Layers },
+            { id: "networkLab", title: "Network Node", desc: "Interactive Topology & Cable-Cut Sandbox", color: C.amber, icon: Network },
+            { id: "devopsLab", title: "DevOps Node", desc: "Docker Stack vs VM & Git Graph", color: C.docker, icon: Box },
+          ].map((node) => {
+            const Icon = node.icon;
+            return (
+              <button
+                key={node.id}
+                onClick={() => goTo(node.id)}
+                className="rounded-3xl p-4 text-left flex flex-col justify-between sticker-sm hover:scale-105 transition-transform"
+                style={{ backgroundColor: node.color, border: `3px solid ${INK}` }}
+              >
+                <div>
+                  <div className="w-8 h-8 rounded-xl flex items-center justify-center mb-2" style={{ backgroundColor: "#fff", border: `2px solid ${INK}` }}>
+                    <Icon size={16} style={{ color: INK }} />
+                  </div>
+                  <p className="font-display text-base font-extrabold" style={{ color: INK }}>{node.title}</p>
+                  <p className="text-[11px] font-ui mt-1 leading-snug" style={{ color: INK }}>{node.desc}</p>
+                </div>
+                <span className="font-code text-[10px] mt-3 font-bold underline" style={{ color: INK }}>Open Visual Node &rarr;</span>
+              </button>
+            );
+          })}
+        </div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
@@ -1029,33 +1200,6 @@ function Dashboard({ goTo }) {
               </div>
             ))}
           </div>
-        </div>
-      </div>
-
-      <div className="mt-5">
-        <SectionLabel icon={Sparkles}>Recommended visual study cards</SectionLabel>
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
-          {RECOMMENDED.map((r, i) => (
-            <motion.div
-              key={r.title}
-              whileHover={{ y: -3, rotate: 0 }}
-              className={`rounded-3xl p-4 flex flex-col justify-between sticker-sm ${i % 2 === 0 ? "rotate-1" : "-rotate-1"}`}
-              style={{ backgroundColor: C.card, border: `3px solid ${INK}` }}
-            >
-              <div>
-                <Pill color={CATEGORY_META[r.tag]?.color || C.sun}>{r.tag}</Pill>
-                <p className="text-[14px] font-ui font-semibold mt-2.5" style={{ color: INK }}>{r.title}</p>
-                <p className="text-[12.5px] mt-1.5 leading-snug font-ui" style={{ color: C.textMuted }}>{r.desc}</p>
-              </div>
-              <button
-                onClick={() => goTo("library")}
-                className="flex items-center gap-1 mt-4 text-[12.5px] font-ui font-bold self-start"
-                style={{ color: C.grape }}
-              >
-                Explore Diagram <ArrowRight size={13} />
-              </button>
-            </motion.div>
-          ))}
         </div>
       </div>
     </div>
@@ -1146,7 +1290,7 @@ function ConceptLibrary() {
           <input
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search: PCB, Deadlocks, Belady, FIFO, Inheritance, Git, Docker, OSI..."
+            placeholder="Search: PCB, Deadlocks, Inheritance, ER Diagram, Git, Docker, OSI..."
             className="bg-transparent outline-none flex-1 text-[13px] font-ui"
             style={{ color: INK }}
           />
@@ -1448,7 +1592,7 @@ function AssessmentMode() {
         </div>
       </div>
 
-      <div className="h-3 rounded-full w-full mb-6" style={{ backgroundColor: C.card, border: `2px solid ${INK}` }}>
+      <div className="h-3 rounded-full w-full mb-6" style={{ backgroundColor: C.card, border: `2.5px solid ${INK}` }}>
         <div className="h-full rounded-full" style={{ backgroundColor: C.grape, width: `${((idx + 1) / QUESTIONS.length) * 100}%`, transition: "width .3s" }} />
       </div>
 
@@ -1505,7 +1649,11 @@ export default function App() {
           <motion.div key={active} initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }} transition={{ duration: 0.2 }}>
             {active === "dashboard" && <Dashboard goTo={setActive} />}
             {active === "library" && <ConceptLibrary />}
+            {active === "osLab" && <OSVisualLab />}
+            {active === "dbmsLab" && <DBMSVisualLab />}
+            {active === "oopLab" && <OOPVisualLab />}
             {active === "networkLab" && <NetworkVisualLab />}
+            {active === "devopsLab" && <DevOpsVisualLab />}
             {active === "practice" && <PracticeArena />}
             {active === "assessment" && <AssessmentMode />}
           </motion.div>
